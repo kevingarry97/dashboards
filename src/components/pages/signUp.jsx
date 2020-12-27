@@ -1,5 +1,5 @@
 import React from 'react';
-import { Email, LockOpen, Person, Phone } from '@material-ui/icons';
+import { Email, Facebook, LockOpen, Person, Phone } from '@material-ui/icons';
 import SignUpIcon from '../../assets/images/signUp.svg';
 import '../css/signIn.css'
 import { Link } from 'react-router-dom';
@@ -33,6 +33,14 @@ const SignUp = () => {
                         </form>
                         <div className="mt-4">
                             <h6>Or Sign in with social platforms</h6>
+                            <div className="socialMedia">
+                                <a className="socialMedia-icon">
+                                    <i className="fa fa-facebook"></i>
+                                </a>
+                                <a className="socialMedia-icon">
+                                    <i className="fa fa-envelope"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div className="col-md-4 offset-md-2 text-center">

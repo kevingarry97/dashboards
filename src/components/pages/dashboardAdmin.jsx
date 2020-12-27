@@ -9,7 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard } from '@material-ui/icons';
+import { Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward } from '@material-ui/icons';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 import DashboardNavbar from '../common/dashboardNavbar';
@@ -19,6 +19,10 @@ import { Switch, Route, Redirect, NavLink } from 'react-router-dom';
 import Overview from '../overview';
 import Products from '../products';
 import Branches from '../branches';
+import SignUp from './signUp';
+import Users from '../users';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../store/auth';
 
 const drawerWidth = 240;
 
@@ -68,6 +72,8 @@ const DashboardAdmin = (props) => {
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
+    const user = useSelector(getUser);
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -109,12 +115,28 @@ const DashboardAdmin = (props) => {
                         <ListItemText primary="Orders" style={{ color: '#F4F5F6'}} />
                     </ListItem>
                 </NavLink>
+                <NavLink to="/admin/users" className="nav-link">
+                    <ListItem>
+                        <ListItemIcon>
+                            <Person style={{ color: '#fff', fontSize: 30}} />
+                        </ListItemIcon>
+                        <ListItemText primary="Users" style={{ color: '#F4F5F6'}} />
+                    </ListItem>
+                </NavLink>
+                <NavLink to="/admin/expenses" className="nav-link">
+                    <ListItem>
+                        <ListItemIcon>
+                            <Assessment style={{ color: '#fff', fontSize: 30}} />
+                        </ListItemIcon>
+                        <ListItemText primary="Reports" style={{ color: '#F4F5F6'}} />
+                    </ListItem>
+                </NavLink>
             </List>
         </div>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
-
+    
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -133,7 +155,7 @@ const DashboardAdmin = (props) => {
                         
                     </div>
                     <div>
-                        <DashboardNavbar path="/adminBM" />
+                        <DashboardNavbar path="/adminBM" user={user} />
                     </div>
                 </Toolbar>
                 
@@ -174,22 +196,23 @@ const DashboardAdmin = (props) => {
                 <DashboardBreadCrumb />
                 <div className="row my-3">
                     <div className="col-xl-3 my-2 col-sm-6">
-                        <DashboardCard title="Branches" symbol={<Business style={{ color: '#727CF5'}} />} />
+                        <DashboardCard average={12} title="Branches" symbol={<Business style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
                     </div>
                     <div className="col-xl-3 my-2 col-sm-6">
-                        <DashboardCard title="Expenses" symbol={<LocalAtm style={{ color: '#727CF5'}} />} />
+                        <DashboardCard average={24} title="Expenses" symbol={<LocalAtm style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
                     </div>
                     <div className="col-xl-3 my-2 col-sm-6">
-                        <DashboardCard title="Users" symbol={<SupervisedUserCircle style={{ color: '#727CF5'}} />} />
+                        <DashboardCard average={36} title="Users" symbol={<SupervisedUserCircle style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
                     </div>
                     <div className="col-xl-3 my-2 col-sm-6">
-                        <DashboardCard title="Products" symbol={<ImportantDevices style={{ color: '#727CF5'}} />} />
+                        <DashboardCard average={6} title="Products" symbol={<ImportantDevices style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
                     </div>
                 </div>
                 <Switch>
                     <Route path="/admin/overview" component={Overview} />
                     <Route path="/admin/products" component={Products} />
                     <Route path="/admin/branches" component={Branches} />
+                    <Route path="/admin/users" component={Users} />
                     <Redirect from="/admin" exact to="/admin/overview" />
                 </Switch>
             </main>

@@ -37,7 +37,7 @@ const Branches = () => {
                     <div className="card-body">
                         <Clearfix title="Projects and Visualization" />
                         <div className="d-flex justify-content-center m-3">
-                            <Charts width={650} height={300} />
+                            <Charts width={700} height={400} />
                         </div>
                     </div>
                 </div>

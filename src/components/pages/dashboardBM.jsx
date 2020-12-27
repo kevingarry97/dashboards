@@ -73,7 +73,7 @@ const DashboardBM = () => {
                                                     <MoreHoriz style={{ color: '#6c757d'}} />
                                                 </a>
                                                 <div className="dropdown-menu dropdown-menu-right border-0 shadow" aria-labelledby="dropdownMenuButton">
-                                                    <h6 class="dropdown-header">Quick actions</h6>
+                                                    <h6 className="dropdown-header">Quick actions</h6>
                                                     <div className="dropdown-divider"></div>
                                                     <a className="dropdown-item my-1" href="#">
                                                         <Add style={{ color: '#8950FC', fontSize: 22 }} /> <span style={{ color: '#6B6D7B', fontSize: 15}}>New Product</span> 
@@ -120,7 +120,7 @@ const DashboardBM = () => {
                                                     <MoreHoriz style={{ color: '#6c757d'}} />
                                                 </a>
                                                 <div className="dropdown-menu dropdown-menu-right border-0 shadow" aria-labelledby="dropdownMenuButton">
-                                                    <h6 class="dropdown-header">Quick actions</h6>
+                                                    <h6 className="dropdown-header">Quick actions</h6>
                                                     <div className="dropdown-divider"></div>
                                                     <a className="dropdown-item my-1" href="#">
                                                         <Add style={{ color: '#8950FC', fontSize: 22 }} /> <span style={{ color: '#6B6D7B', fontSize: 15}}>New Product</span> 
@@ -161,7 +161,7 @@ const DashboardBM = () => {
                                                     <MoreHoriz style={{ color: '#6c757d'}} />
                                                 </a>
                                                 <div className="dropdown-menu dropdown-menu-right border-0 shadow" aria-labelledby="dropdownMenuButton">
-                                                    <h6 class="dropdown-header">Quick actions</h6>
+                                                    <h6 className="dropdown-header">Quick actions</h6>
                                                     <div className="dropdown-divider"></div>
                                                     <a className="dropdown-item my-1" href="#">
                                                         <Add style={{ color: '#8950FC', fontSize: 22 }} /> <span style={{ color: '#6B6D7B', fontSize: 15}}>New Product</span> 
@@ -195,7 +195,7 @@ const DashboardBM = () => {
                                                     <MoreHoriz style={{ color: '#878d92'}} />
                                                 </a>
                                                 <div className="dropdown-menu dropdown-menu-right border-0 shadow" aria-labelledby="dropdownMenuButton">
-                                                    <h6 class="dropdown-header">Quick actions</h6>
+                                                    <h6 className="dropdown-header">Quick actions</h6>
                                                     <div className="dropdown-divider"></div>
                                                     <a className="dropdown-item my-1" href="#" data-toggle="modal" data-target="#exampleModal">
                                                         <Add style={{ color: '#8950FC', fontSize: 22 }} /> <span style={{ color: '#6B6D7B', fontSize: 15}}>New Product</span> 
@@ -219,10 +219,10 @@ const DashboardBM = () => {
                     </div>
                 </div>
             </section>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
+            <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-body">
                             <ExpenseForm />
                         </div>
                     </div>

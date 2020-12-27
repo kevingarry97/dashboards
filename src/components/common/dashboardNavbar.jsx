@@ -2,7 +2,7 @@ import { Assessment, Assignment, Ballot, ChatBubbleOutline, Face, NewReleases, N
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function DashboardNavbar({bgColor, path}) {
+function DashboardNavbar({bgColor, path, user}) {
     return (
         <nav className="navbar navbar-expand-lg text-white" style={{ backgroundColor: bgColor}}>
             <div className="container">
@@ -77,10 +77,9 @@ function DashboardNavbar({bgColor, path}) {
                                 <div className="media">
                                     <Face style={{ color: '#98A6AD', fontSize: 30}} />
                                     <div className="media-body ml-2">
-                                        <p className="mb-0 pb-0" style={{ fontWeight: '600', color: '#A7B3B9'}}>Kevin ISHIMWE <small style={{color: '#A7B3B9'}}>(B.M)</small></p>
+                                        <p className="pt-1" style={{ fontWeight: '600', color: '#A7B3B9'}}>{user?.names} <small style={{color: '#A7B3B9'}}></small></p>
                                     </div>
                                 </div>
-                                
                             </a>
                             <div className="dropdown-menu dropdown-menu-right border-0 shadow pt-3" aria-labelledby="userAccount">
                                 <a className="dropdown-item my-2" href="#">

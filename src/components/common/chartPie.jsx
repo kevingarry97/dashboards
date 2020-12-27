@@ -10,13 +10,13 @@ const data = [
 ];
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
-const ChartPie = () => {
+const ChartPie = ({cx, cy}) => {
     return ( 
         <PieChart width={300} height={200}>
             <Pie
                 data={data}
-                cx={130}
-                cy={110}
+                cx={cx}
+                cy={cy}
                 innerRadius={60}
                 outerRadius={80}
                 fill="#8884d8"

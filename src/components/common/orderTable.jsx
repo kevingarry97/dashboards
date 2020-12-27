@@ -3,7 +3,7 @@ import React from 'react';
 
 const OrderTable = () => {
     return (
-        <div className="table-responsive">
+        <div className="table-responsive my-3">
             <table className="table table-borderless">
                 <tbody>
                     <tr>
