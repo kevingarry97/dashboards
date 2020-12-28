@@ -22,14 +22,14 @@ class SignIn extends Form {
 
     doSubmit = () => {
         this.props.loginUser(this.state.data);
+        // console.log(this.state.data);
         const user = getCurrentUser();
         setTimeout(() => {
             if(user) {
                 this.setState({data: {phone_no: '', password: ''}});
                 window.location = '/admin';
             }
-        }, 3000)
-        
+        }, 2000)
     }
     render() { 
 

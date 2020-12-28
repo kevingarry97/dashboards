@@ -27,12 +27,18 @@ const slice = createSlice({
 export const { productAdded, productSuccess, productSpecific, productUpdated } = slice.actions;
 export default slice.reducer;
 
-export const addProduct = product => apiCallBegan({
-  url: '/createNewProduct',
-  method: "post",
-  data: product,
-  onSuccess: productAdded.type
-})
+export const addProduct = product => {
+
+  return (
+    apiCallBegan({
+    url: '/createNewProduct',
+    method: "post",
+    data: product,
+    onSuccess: productAdded.type
+  })
+  )
+    
+} 
 
 export const viewSpecificProduct = id => apiCallBegan({
   url: '/viewSpecificProduct/' + id,

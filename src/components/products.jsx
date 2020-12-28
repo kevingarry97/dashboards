@@ -44,7 +44,7 @@ class Products extends Form {
         return (  
             <>
                 <div className="row">
-                    <div className="col-lg-5 col-sm-6">
+                    <div className="col-lg-5 col-sm-6 my-2">
                         <div className="card border-0">
                             <div className="card-body">
                                 <Clearfix title="All Products" />
@@ -53,10 +53,11 @@ class Products extends Form {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-7 col-sm-6">
+                    <div className="col-lg-7 col-sm-6 my-2">
                         <div className="card border-0">
                             <div className="card-body">
-                                <form onSubmit={this.handleSubmit}>
+                                <h4 className="font-weight-normal" style={{ color: "#777", marginBottom: 15 }}>Create a Product</h4>
+                                <form onSubmit={this.handleSubmit} encType="multipart/form-data">
                                     {this.renderInput('name', 'Product name', '', 'Product name')}
                                     <div className="row">
                                         <div className="col-md-6">
@@ -70,7 +71,6 @@ class Products extends Form {
                                     <div className="my-3">
                                         {this.renderButton('Create Product')}
                                     </div>
-                                    
                                 </form>
                             </div>
                         </div>

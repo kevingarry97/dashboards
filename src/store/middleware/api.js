@@ -12,7 +12,7 @@ const api = ({ dispatch }) => next => async (action) => {
     
     try {
         const response = await axios.request({
-            baseURL: 'http://frozen-harbor-29274.herokuapp.com/api',
+            baseURL: 'https://frozen-harbor-29274.herokuapp.com/api',
             url,
             method,
             data,
