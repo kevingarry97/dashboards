@@ -4,12 +4,16 @@ import Clearfix from './common/clearfix';
 import Form from './common/form';
 import UserTable from './common/usersTable';
 import { ViewBranch } from '../store/branch';
-import { addManager } from '../store/manager';
+import { addManager, getManagers, viewManager } from '../store/manager';
 import { connect } from 'react-redux';
 import SuccessMessage from './common/successMessage';
+import { paginate } from '../utils/paginate';
+import Pagination from './common/pagination';
 
 class Users extends Form {
-    state = { 
+    state = {
+        pageSize: 2,
+        currentPage: 1,
         data: { names: '', phone_no: '', email: '', password: '', password_confirmation: '', branchId: ''},
         errors: {},
     }
@@ -23,10 +27,14 @@ class Users extends Form {
         branchId: Joi.string().required().label('Branch')
     }
 
+    handlePageChange = page => {
+        this.setState({ currentPage: page});
+    }
+
     componentDidMount() {
         this.props.ViewBranch();
+        this.props.viewManager();
     }
-    
 
     doSubmit = () => {
         this.props.addManager(this.state.data);
@@ -35,6 +43,10 @@ class Users extends Form {
     }
 
     render() { 
+        const { currentPage, pageSize } = this.state;
+        const {managers} = this.props;
+        const users = paginate(managers, currentPage, pageSize);
+
         return (  
             <div className="row">
                 <div className="col-md-7">
@@ -71,7 +83,8 @@ class Users extends Form {
                     <div className="card border-0">
                         <div className="card-body">
                             <Clearfix title="Branch manager" />
-                            <UserTable />
+                            <UserTable users={users} />
+                            <Pagination itemsCount={managers && managers.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                         </div>
                     </div>
                 </div>
@@ -81,11 +94,13 @@ class Users extends Form {
 }
  
 const mapStateToProps = state => ({
-    branch: state.entities.branches.list.branches
+    branch: state.entities.branches.list.branches,
+    managers: getManagers(state)
 });
 
 const mapDispatchToProps = dispatch => ({
     ViewBranch: () => dispatch(ViewBranch()),
+    viewManager: () => dispatch(viewManager()),
     addManager: (manager) => dispatch(addManager(manager))
 })
 

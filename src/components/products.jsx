@@ -3,9 +3,15 @@ import Joi from 'joi-browser'
 import ProductTable from './common/productTable';
 import Clearfix from './common/clearfix';
 import Form from '../components/common/form';
+import { connect } from 'react-redux';
+import { viewProduct, addProduct, getProducts } from '../store/product';
+import { paginate } from '../utils/paginate';
+import Pagination from './common/pagination';
 
 class Products extends Form {
     state = {
+        pageSize: 2,
+        currentPage: 1,
         data: {name: '', quantity: '', unitPrice: '', imageUrl: ''},
         errors: {}
     }
@@ -17,12 +23,24 @@ class Products extends Form {
         imageUrl: Joi.string().required().label('Image')
     }
 
+    componentDidMount() {
+        this.props.viewProduct();
+    }
+    
+    handlePageChange = page => {
+        this.setState({ currentPage: page});
+    }
+
     doSubmit = () => {
-        console.log(this.state.data);
+        this.props.addProduct(this.state.data);
         this.setState({data: {name: '', quantity: '', unitPrice: '', imageUrl: ''}})
     }
 
-    render() { 
+    render() {
+        const { currentPage, pageSize } = this.state;
+        const { products } = this.props;
+        const prods = paginate(products, currentPage, pageSize);
+
         return (  
             <>
                 <div className="row">
@@ -30,7 +48,8 @@ class Products extends Form {
                         <div className="card border-0">
                             <div className="card-body">
                                 <Clearfix title="All Products" />
-                                <ProductTable />
+                                <ProductTable products={prods} />
+                                <Pagination itemsCount={products && products.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                             </div>
                         </div>
                     </div>
@@ -62,4 +81,12 @@ class Products extends Form {
     }
 }
 
-export default Products;
+const mapStateToProps = state => ({
+    products: getProducts(state)
+});
+const mapDispatchToProps = dispatch => ({
+    viewProduct: () => dispatch(viewProduct()),
+    addProduct: (product) => dispatch(addProduct(product))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

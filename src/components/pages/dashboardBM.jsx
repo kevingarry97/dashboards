@@ -13,7 +13,7 @@ import Charts from '../common/chart';
 const DashboardBM = () => {
     return (
         <>
-            <DashboardNavbar path="/admin" bgColor="#181C32" />
+            <DashboardNavbar path="/logout" bgColor="#181C32" />
             <section className="py-4 px-5" style={{ backgroundColor: '#f7f8fc'}}>
                 <div className="container-fluid px-5">
                     <DashboardBreadCrumb />

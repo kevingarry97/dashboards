@@ -29,7 +29,7 @@ export default slice.reducer;
 
 export const addProduct = product => apiCallBegan({
   url: '/createNewProduct',
-  method: 'post',
+  method: "post",
   data: product,
   onSuccess: productAdded.type
 })
@@ -43,11 +43,5 @@ export const viewProduct = () => apiCallBegan({
   url: '/viewAllProducts',
   onSuccess: productSuccess.type
 })
-
-// export const updateProduct = (id) => apiCallBegan({
-//   url: '/ /' + id,
-//   method: 'put',
-//   onSuccess: productUpdated.tyoe
-// })
 
 export const getProducts = (state) => state.entities.product.list.products;

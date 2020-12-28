@@ -155,7 +155,7 @@ const DashboardAdmin = (props) => {
                         
                     </div>
                     <div>
-                        <DashboardNavbar path="/adminBM" user={user} />
+                        <DashboardNavbar path="/logout" user={user} />
                     </div>
                 </Toolbar>
                 

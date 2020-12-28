@@ -51,6 +51,7 @@
   }
   .signUpCircle {
     position: absolute;
+    margin-top: 12em;
     width: 100%;
     height: 100%;
     background-color: #727cf5;

@@ -1,14 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { viewProduct, getProducts } from '../../store/product';
+import React from 'react';
 
-const ProductTable = () => {
-    const dispatch = useDispatch();
-    const products = useSelector(getProducts)
-
-    useEffect(() => {
-        dispatch(viewProduct());
-    }, []);
+const ProductTable = ({products}) => {
 
     return (
         <div className="table-responsive my-3">
