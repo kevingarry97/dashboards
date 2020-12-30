@@ -3,7 +3,7 @@ import { ArrowUpward, Person, Apartment, ArrowDownward, Ballot, MonetizationOn, 
 import DashboardCard from '../common/dashboardCard';
 import DashboardNavbar from '../common/dashboardNavbar';
 import DashboardBreadCrumb from '../common/dashboardBreadCrumb';
-import OrderTable from '../common/orderTable';
+import OrderTable from '../common/distributionTable';
 import ProductTable from '../common/productTable';
 import DashboardIcon from '../../assets/images/dashboard.svg'
 import ExpenseTable from '../common/expenseTable';

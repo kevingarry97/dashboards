@@ -23,7 +23,7 @@ class SignIn extends Form {
             const { data } = this.state;
             await login(data.phone_no, data.password);
       
-            this.props.history.push("/admin");
+            window.location = "/admin";
             this.setState({data: {phone_no: '', password: ''}});
           } catch (ex) {
             if (ex.response && ex.response.status === 400) {

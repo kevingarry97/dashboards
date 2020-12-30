@@ -2,7 +2,7 @@ import React from 'react';
 import { MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn } from '@material-ui/icons';
 
 
-function Clearfix({title}) {
+function Clearfix({title, dataTarget}) {
     return (
         <div className="clearfix mb-1">
             <aside className="float-left">
@@ -16,7 +16,7 @@ function Clearfix({title}) {
                     <div className="dropdown-menu dropdown-menu-right border-0 shadow" aria-labelledby="dropdownMenuButton">
                         <h6 className="dropdown-header">Quick actions</h6>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item my-1" href="#" data-toggle="modal" data-target="#exampleModal">
+                        <a className="dropdown-item my-1" href="#" data-toggle="modal" data-target={dataTarget}>
                             <Add style={{ color: '#8950FC', fontSize: 22 }} /> <span style={{ color: '#6B6D7B', fontSize: 15}}>New Product</span> 
                         </a>
                         <a className="dropdown-item my-1" href="#">

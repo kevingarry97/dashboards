@@ -5,8 +5,8 @@ const Select = ({name, label, options, error, ...rest}) => {
         <div className="form-group">
             <label htmlFor="">{label}</label>
             <select name={name} id={name} {...rest} className="custom-select my-1 mr-sm-2">
-                <option disabled value="">Choose Branch</option>
-                {options.map(option => (
+                <option disabled value="">{label}</option>
+                {options && options.map(option => (
                     <option key={option.id} value={option.id}>
                         {option.name}
                     </option>

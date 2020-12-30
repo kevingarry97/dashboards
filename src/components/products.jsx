@@ -3,7 +3,7 @@ import Joi from 'joi-browser'
 import ProductTable from './common/productTable';
 import Clearfix from './common/clearfix';
 import Form from '../components/common/form';
-import { addProduct, getProduct, viewSpecificProduct } from '../services/productService';
+import { addProduct, getProduct } from '../services/productService';
 import { paginate } from '../utils/paginate';
 import Pagination from './common/pagination';
 

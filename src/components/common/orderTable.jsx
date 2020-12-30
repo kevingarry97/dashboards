@@ -1,141 +1,104 @@
-import { BorderColor, DeleteOutline } from '@material-ui/icons';
 import React from 'react';
+import { Visibility } from '@material-ui/icons';
 
-const OrderTable = ({distributions}) => {
-    console.log(distributions);
+const OrderTable= () => {
     return (
-        <div className="table-responsive my-3">
-            <table className="table table-borderless">
+        <div className="table-responsive">
+            <table className="table table-hover">
+                <thead className="table-sm">
+                    <tr className="table-secondary">
+                        <th scope="col">#</th>
+                        <th scope="col">Order</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr>``
-                        <th scope="row" style={{color: '#757D85'}}># 1</th>
+                    <tr className="table-light text-muted">
+                        <td>1</td>
+                        <td>Oil, Rice, Soaps</td>
+                        <td>24/5/2020</td>
                         <td>
-                            <h6 className="mb-1">Murengezi Sylvestre</h6>
-                            <small>Tel: <span style={{color: '#b5b5cb'}}>250788937465</span></small>
+                            <p className="my-0"> Rubavu Branch</p>
+                            <small><strong>Location:</strong> Rubavu</small>
                         </td>
+                        <td>Lambert Nsengiyumva</td>
                         <td>
-                        <h6 className="mb-1">Rwf 500, 000</h6>
-                            <small >Paid: <span style={{color: '#b5b5cb'}}> 22, 000</span></small> 
+                            <span className="alert alert-danger py-1 border-0" style={{ borderRadius: 20}}>
+                                Pending
+                            </span>
                         </td>
+                        <td>Rwf 5, 000, 000</td>
                         <td>
-                            <small style={{ color: '#b5c5de'}}>Olive Oil, Savon Liquid</small>
-                        </td>
-                        <td>
-                            <a href="#" className="px-2 pb-2 mx-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <BorderColor style={{ color: '#0BB783', fontSize: 16}} />
-                            </a>
-                            <a href="#" className="px-2 pb-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <DeleteOutline style={{ color: '#0BB783', fontSize: 16}} />
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row" style={{color: '#757D85'}}># 2</th>
-                        <td>
-                            <h6 className="mb-1">Murengezi Sylvestre</h6>
-                            <small>Tel: <span style={{color: '#b5b5cb'}}>250788937465</span></small>
-                        </td>
-                        <td>
-                        <h6 className="mb-1">Rwf 500, 000</h6>
-                            <small >Paid: <span style={{color: '#b5b5cb'}}> 22, 000</span></small> 
-                        </td>
-                        <td>
-                            <small style={{ color: '#b5c5de'}}>Olive Oil, Savon Liquid</small>
-                        </td>
-                        <td>
-                            <a href="#" className="px-2 pb-2 mx-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <BorderColor style={{ color: '#0BB783', fontSize: 16}} />
-                            </a>
-                            <a href="#" className="px-2 pb-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <DeleteOutline style={{ color: '#0BB783', fontSize: 16}} />
+                            <a href="#" className="p-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
+                                <Visibility style={{ color: '#0BB783', fontSize: 18}} />
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row" style={{color: '#757D85'}}># 3</th>
+                    <tr className="table-light text-muted">
+                        <td>1</td>
+                        <td>Oil, Rice, Soaps</td>
+                        <td>24/5/2020</td>
                         <td>
-                            <h6 className="mb-1">Murengezi Sylvestre</h6>
-                            <small>Tel: <span style={{color: '#b5b5cb'}}>250788937465</span></small>
+                            <p className="my-0"> Rubavu Branch</p>
+                            <small><strong>Location:</strong> Rubavu</small>
                         </td>
+                        <td>Lambert Nsengiyumva</td>
                         <td>
-                        <h6 className="mb-1">Rwf 500, 000</h6>
-                            <small >Paid: <span style={{color: '#b5b5cb'}}> 22, 000</span></small> 
+                            <span className="alert alert-success py-1 border-0" style={{ borderRadius: 20}}>
+                                Completed
+                            </span>
                         </td>
+                        <td>Rwf 5, 000, 000</td>
                         <td>
-                            <small style={{ color: '#b5c5de'}}>Olive Oil, Savon Liquid</small>
-                        </td>
-                        <td>
-                            <a href="#" className="px-2 pb-2 mx-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <BorderColor style={{ color: '#0BB783', fontSize: 16}} />
-                            </a>
-                            <a href="#" className="px-2 pb-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <DeleteOutline style={{ color: '#0BB783', fontSize: 16}} />
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row" style={{color: '#757D85'}}># 4</th>
-                        <td>
-                            <h6 className="mb-1">Murengezi Sylvestre</h6>
-                            <small>Tel: <span style={{color: '#b5b5cb'}}>250788937465</span></small>
-                        </td>
-                        <td>
-                        <h6 className="mb-1">Rwf 500, 000</h6>
-                            <small >Paid: <span style={{color: '#b5b5cb'}}> 22, 000</span></small> 
-                        </td>
-                        <td>
-                            <small style={{ color: '#b5c5de'}}>Olive Oil, Savon Liquid</small>
-                        </td>
-                        <td>
-                            <a href="#" className="px-2 pb-2 mx-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <BorderColor style={{ color: '#0BB783', fontSize: 16}} />
-                            </a>
-                            <a href="#" className="px-2 pb-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <DeleteOutline style={{ color: '#0BB783', fontSize: 16}} />
+                            <a href="#" className="p-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
+                                <Visibility style={{ color: '#0BB783', fontSize: 18}} />
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row" style={{color: '#757D85'}}># 5</th>
+                    <tr className="table-light text-muted">
+                        <td>1</td>
+                        <td>Oil, Rice, Soaps</td>
+                        <td>24/5/2020</td>
                         <td>
-                            <h6 className="mb-1">Murengezi Sylvestre</h6>
-                            <small>Tel: <span style={{color: '#b5b5cb'}}>250788937465</span></small>
+                            <p className="my-0"> Rubavu Branch</p>
+                            <small><strong>Location:</strong> Rubavu</small>
                         </td>
+                        <td>Lambert Nsengiyumva</td>
                         <td>
-                        <h6 className="mb-1">Rwf 500, 000</h6>
-                            <small >Paid: <span style={{color: '#b5b5cb'}}> 22, 000</span></small> 
+                            <span className="alert alert-secondary py-1 border-0" style={{ borderRadius: 20}}>
+                                On Hold
+                            </span>
                         </td>
+                        <td>Rwf 5, 000, 000</td>
                         <td>
-                            <small style={{ color: '#b5c5de'}}>Olive Oil, Savon Liquid</small>
-                        </td>
-                        <td>
-                            <a href="#" className="px-2 pb-2 mx-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <BorderColor style={{ color: '#0BB783', fontSize: 16}} />
-                            </a>
-                            <a href="#" className="px-2 pb-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <DeleteOutline style={{ color: '#0BB783', fontSize: 16}} />
+                            <a href="#" className="p-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
+                                <Visibility style={{ color: '#0BB783', fontSize: 18}} />
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row" style={{color: '#757D85'}}># 6</th>
+                    <tr className="table-light text-muted">
+                        <td>1</td>
+                        <td>Oil, Rice, Soaps</td>
+                        <td>24/5/2020</td>
                         <td>
-                            <h6 className="mb-1">Murengezi Sylvestre</h6>
-                            <small>Tel: <span style={{color: '#b5b5cb'}}>250788937465</span></small>
+                            <p className="my-0"> Rubavu Branch</p>
+                            <small><strong>Location:</strong> Rubavu</small>
                         </td>
+                        <td>Lambert Nsengiyumva</td>
                         <td>
-                        <h6 className="mb-1">Rwf 500, 000</h6>
-                            <small >Paid: <span style={{color: '#b5b5cb'}}> 22, 000</span></small> 
+                            <span className="alert alert-primary py-1 border-0" style={{ borderRadius: 20}}>
+                                Processing
+                            </span>
                         </td>
+                        <td>Rwf 5, 000, 000</td>
                         <td>
-                            <small style={{ color: '#b5c5de'}}>Olive Oil, Savon Liquid</small>
-                        </td>
-                        <td>
-                            <a href="#" className="px-2 pb-2 mx-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <BorderColor style={{ color: '#0BB783', fontSize: 16}} />
-                            </a>
-                            <a href="#" className="px-2 pb-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
-                                <DeleteOutline style={{ color: '#0BB783', fontSize: 16}} />
+                            <a href="#" className="p-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
+                                <Visibility style={{ color: '#0BB783', fontSize: 18}} />
                             </a>
                         </td>
                     </tr>

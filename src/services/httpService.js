@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+axios.defaults.headers.common['Content-Type'] = 'application/pdf'
 axios.interceptors.response.use(null, (error) => {
     const expectedError =
         error.response &&

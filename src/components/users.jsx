@@ -31,6 +31,7 @@ class Users extends Form {
     async populateBranch() {
         const { data } = await Branch.getBranch();
         this.setState({ branches: data['branches']});
+        console.log(data);
     }
 
     handlePageChange = page => {

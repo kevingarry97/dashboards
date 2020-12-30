@@ -22,7 +22,7 @@ const Routes = () => {
                 if(user.role === 'Administrator') return <DashboardAdmin {...props} />
             }} />
             {!user && <Route path="/signIn" component={SignIn} />}
-            {user && user.role == 'Customer' && <Route path="/home" component={Home} />}
+            {user && user.role === 'Customer' && <Route path="/home" component={Home} />}
             {user && user.role === 'BranchManager' && <Route path="/adminBM" component={DashboardBM} />}
             {user && user.role === 'Administrator' && <Redirect to="/admin" />}
             <Redirect from="/" exact to="/signIn" />

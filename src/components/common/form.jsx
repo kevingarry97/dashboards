@@ -97,7 +97,7 @@ class Form extends Component {
 
     renderButton(label) {
         return (
-            <button disabled={this.validate()} className="btn btn-block font-weight-bold py-2" style={{ backgroundColor: '#727CF5', color: '#fff', borderRadius: 20}}>
+            <button disabled={this.validate()} className="btn btn-block btn-sm font-weight-bold py-2" style={{ backgroundColor: '#727CF5', color: '#fff', borderRadius: 20}}>
                 {label}
             </button>
         )

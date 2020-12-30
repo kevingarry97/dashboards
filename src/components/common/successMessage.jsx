@@ -1,8 +1,8 @@
 import React from 'react';
 
-const SuccessMessage = ({message}) => {
+const SuccessMessage = ({message, className}) => {
     return (
-        <div className="alert alert-success border-0 shadow">
+        <div className={"border-0 shadow alert " + className}>
             {message}
         </div>
     );
