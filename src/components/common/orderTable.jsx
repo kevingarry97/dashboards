@@ -7,7 +7,7 @@ const OrderTable = ({distributions}) => {
         <div className="table-responsive my-3">
             <table className="table table-borderless">
                 <tbody>
-                    <tr>
+                    <tr>``
                         <th scope="row" style={{color: '#757D85'}}># 1</th>
                         <td>
                             <h6 className="mb-1">Murengezi Sylvestre</h6>
