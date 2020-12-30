@@ -15,6 +15,7 @@ class Users extends Form {
         currentPage: 1,
         data: { names: '', phone_no: '', email: '', password: '', password_confirmation: '', branchId: ''},
         errors: {},
+        error: '',
         managers: [],
         branches: []
     }
@@ -45,7 +46,8 @@ class Users extends Form {
     }
 
     doSubmit = async () => {
-        await Manager.registerManager(this.state.data);
+        const {data} = await Manager.registerManager(this.state.data);
+        this.setState({ error: data.message})
         this.setState({data:{ names: '', phone_no: '', email: '', password: '', password_confirmation: '', branchId: ''}})
     }
 
@@ -60,7 +62,7 @@ class Users extends Form {
                         <div className="card-body">
                             <h4 style={{ color: '#6C757D'}}>Create a new branch Manager: </h4>
                             <p style={{ color: '#6C757D'}}>Below are fields to create a new user </p>
-                            <SuccessMessage message="User create successfully" />
+                            {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}
                             <form onSubmit={this.handleSubmit} className="mt-4">
                                 {this.renderInput('names', 'e.g: John Doe', '', 'Full names')}
                                 <div className="row">
