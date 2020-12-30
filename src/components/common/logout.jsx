@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { logoutSuccess } from '../../store/auth';
+import auth from '../../services/auth';
 
 const Logout = () => {
-    const dispatch =  useDispatch();
-
     useEffect(() => {
-        dispatch(logoutSuccess());
+        auth.logout();
+
         window.location = '/';
-    }, []);
+    }, [])
 
     return null;
 }

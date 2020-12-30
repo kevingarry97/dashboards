@@ -3,8 +3,7 @@ import Joi from 'joi-browser'
 import ProductTable from './common/productTable';
 import Clearfix from './common/clearfix';
 import Form from '../components/common/form';
-import { connect } from 'react-redux';
-import { viewProduct, addProduct, getProducts } from '../store/product';
+import { addProduct, getProduct, viewSpecificProduct } from '../services/productService';
 import { paginate } from '../utils/paginate';
 import Pagination from './common/pagination';
 
@@ -13,7 +12,8 @@ class Products extends Form {
         pageSize: 2,
         currentPage: 1,
         data: {name: '', quantity: '', unitPrice: '', imageUrl: ''},
-        errors: {}
+        errors: {},
+        products: []
     }
 
     schema = {
@@ -23,22 +23,22 @@ class Products extends Form {
         imageUrl: Joi.string().required().label('Image')
     }
 
-    componentDidMount() {
-        this.props.viewProduct();
+    async componentDidMount() {
+        const { data } = await getProduct();
+        this.setState({ products: data['products']});
     }
     
     handlePageChange = page => {
         this.setState({ currentPage: page});
     }
 
-    doSubmit = () => {
-        this.props.addProduct(this.state.data);
+    doSubmit = async () => {
+        await addProduct(this.state.data);
         this.setState({data: {name: '', quantity: '', unitPrice: '', imageUrl: ''}})
     }
 
     render() {
-        const { currentPage, pageSize } = this.state;
-        const { products } = this.props;
+        const { currentPage, pageSize, products } = this.state;
         const prods = paginate(products, currentPage, pageSize);
 
         return (  
@@ -81,12 +81,4 @@ class Products extends Form {
     }
 }
 
-const mapStateToProps = state => ({
-    products: getProducts(state)
-});
-const mapDispatchToProps = dispatch => ({
-    viewProduct: () => dispatch(viewProduct()),
-    addProduct: (product) => dispatch(addProduct(product))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default Products;

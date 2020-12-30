@@ -3,9 +3,8 @@ import Joi from 'joi-browser';
 import Clearfix from './common/clearfix';
 import Form from './common/form';
 import UserTable from './common/usersTable';
-import { ViewBranch } from '../store/branch';
-import { addManager, getManagers, viewManager } from '../store/manager';
-import { connect } from 'react-redux';
+import * as Manager from '../services/managerService';
+import * as Branch from '../services/branchService';
 import SuccessMessage from './common/successMessage';
 import { paginate } from '../utils/paginate';
 import Pagination from './common/pagination';
@@ -16,6 +15,8 @@ class Users extends Form {
         currentPage: 1,
         data: { names: '', phone_no: '', email: '', password: '', password_confirmation: '', branchId: ''},
         errors: {},
+        managers: [],
+        branches: []
     }
 
     schema = {
@@ -27,24 +28,28 @@ class Users extends Form {
         branchId: Joi.string().required().label('Branch')
     }
 
+    async populateBranch() {
+        const { data } = await Branch.getBranch();
+        this.setState({ branches: data['branches']});
+    }
+
     handlePageChange = page => {
         this.setState({ currentPage: page});
     }
 
-    componentDidMount() {
-        this.props.ViewBranch();
-        this.props.viewManager();
+    async componentDidMount() {
+        await this.populateBranch();
+        const { data } = await Manager.viewManager();
+        this.setState({ managers: data['branch Managers'] });
     }
 
-    doSubmit = () => {
-        this.props.addManager(this.state.data);
-        console.log(this.state.data);
+    doSubmit = async () => {
+        await Manager.registerManager(this.state.data);
         this.setState({data:{ names: '', phone_no: '', email: '', password: '', password_confirmation: '', branchId: ''}})
     }
 
     render() { 
-        const { currentPage, pageSize } = this.state;
-        const {managers} = this.props;
+        const { currentPage, pageSize, managers } = this.state;
         const users = paginate(managers, currentPage, pageSize);
 
         return (  
@@ -65,7 +70,7 @@ class Users extends Form {
                                         {this.renderInput('email', 'e.g: johnDoe@gmail.com', '', 'Email')}
                                     </div>
                                 </div>
-                                {this.props.branch && this.renderSelect('branchId', 'Branch', this.props.branch)}
+                                {this.renderSelect('branchId', 'Branch', this.state.branches)}
                                 <div className="row">
                                     <div className="col-md-6">
                                         {this.renderInput('password', '......', '', 'Password', 'password')}
@@ -84,7 +89,7 @@ class Users extends Form {
                         <div className="card-body">
                             <Clearfix title="Branch manager" />
                             <UserTable users={users} />
-                            <Pagination itemsCount={managers && managers.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
+                            <Pagination itemsCount={managers.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                         </div>
                     </div>
                 </div>
@@ -92,16 +97,5 @@ class Users extends Form {
         );
     }
 }
- 
-const mapStateToProps = state => ({
-    branch: state.entities.branches.list.branches,
-    managers: getManagers(state)
-});
 
-const mapDispatchToProps = dispatch => ({
-    ViewBranch: () => dispatch(ViewBranch()),
-    viewManager: () => dispatch(viewManager()),
-    addManager: (manager) => dispatch(addManager(manager))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default Users;

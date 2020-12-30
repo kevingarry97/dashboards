@@ -1,7 +1,8 @@
 import { BorderColor, DeleteOutline } from '@material-ui/icons';
 import React from 'react';
 
-const OrderTable = () => {
+const OrderTable = ({distributions}) => {
+    console.log(distributions);
     return (
         <div className="table-responsive my-3">
             <table className="table table-borderless">

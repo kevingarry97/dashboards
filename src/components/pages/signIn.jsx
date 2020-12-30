@@ -1,12 +1,10 @@
 import React from 'react';
 import Joi from 'joi-browser'
 import Form from '../common/form';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LockOpen, Phone } from '@material-ui/icons';
 import SignUp from '../../assets/images/signUp.svg';
-import { loginUser } from '../../store/auth';
-import { getCurrentUser } from '../../services/auth';
+import { login } from '../../services/auth';
 import '../css/signIn.css'
 
 class SignIn extends Form {
@@ -20,16 +18,20 @@ class SignIn extends Form {
         password: Joi.string().required().label('Password')
     }
 
-    doSubmit = () => {
-        this.props.loginUser(this.state.data);
-        // console.log(this.state.data);
-        const user = getCurrentUser();
-        setTimeout(() => {
-            if(user) {
-                this.setState({data: {phone_no: '', password: ''}});
-                window.location = '/admin';
+    doSubmit = async () => {
+        try {
+            const { data } = this.state;
+            await login(data.phone_no, data.password);
+      
+            window.location = "/admin";
+            this.setState({data: {phone_no: '', password: ''}});
+          } catch (ex) {
+            if (ex.response && ex.response.status === 400) {
+              const errors = { ...this.state.errors };
+              errors.phone_no = ex.response.data;
+              this.setState({ errors });
             }
-        }, 2000)
+        }
     }
     render() { 
 
@@ -72,8 +74,4 @@ class SignIn extends Form {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    loginUser: (user) => dispatch(loginUser(user))
-})
-
-export default connect(null, mapDispatchToProps)(SignIn);
+export default SignIn;
