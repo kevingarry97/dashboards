@@ -15,13 +15,13 @@ const Routes = () => {
         <Switch>
             <Route path="/signUp" component={SignUp} />
             {user && <Route path="/logout" component={Logout} />}
-            {!user && <Route path="/signIn" component={SignIn} />}
             <Route path="/admin" render={(props) => {
                 if(!user) return <Redirect to="/signIn" />
                 if(user.role === 'Customer') return <Redirect to="/home" />
                 if(user.role === 'BranchManager') return <Redirect to="/adminBM" />
                 if(user.role === 'Administrator') return <DashboardAdmin {...props} />
             }} />
+            {!user && <Route path="/signIn" component={SignIn} />}
             {user && user.role == 'Customer' && <Route path="/home" component={Home} />}
             {user && user.role === 'BranchManager' && <Route path="/adminBM" component={DashboardBM} />}
             {user && user.role === 'Administrator' && <Redirect to="/admin" />}
