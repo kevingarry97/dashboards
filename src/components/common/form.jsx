@@ -3,6 +3,7 @@ import Input from './input';
 import Joi from 'joi-browser';
 import Select from './select';
 import ImageInput from './imageInput';
+import TextArea from './textArea';
 
 class Form extends Component {
     state = { 
@@ -77,6 +78,19 @@ class Form extends Component {
                 label={label}
                 onChange={this.handleChange} 
                 error={errors[name]} 
+            />
+        )
+    }
+
+    renderTextArea(name, placeholder) {
+        const {data, errors} = this.state;
+        return (
+            <TextArea 
+                name={name}
+                value={data[name]}
+                placeholder={placeholder}
+                onChange={this.handleChange}
+                error={errors[name]}
             />
         )
     }
