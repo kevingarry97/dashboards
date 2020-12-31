@@ -6,7 +6,7 @@ const OrderTable = ({distributions}) => {
         <div className="table-responsive my-3">
             <table className="table table-borderless">
                 <tbody>
-                    {distributions.map((item) => (
+                    {distributions?.map((item) => (
                         <tr key={item.id}>
                             <th scope="row" style={{color: '#757D85'}}># {item.id}</th>
                             <td>
