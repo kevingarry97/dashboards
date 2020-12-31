@@ -10,7 +10,6 @@ import ExpenseForm from './common/expenseForm';
 import { Add, InsertDriveFile } from '@material-ui/icons';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Form from './common/form';
 import Joi from 'joi-browser';
@@ -64,10 +63,12 @@ class Branches extends Form {
 
     handleOpenImport = () => {
         this.setState({ openImport: true })
+        console.log("Clicked")
     };
 
     handleClose = () => {
         this.setState({ openDistribution: false })
+        this.setState({ openImport: false })
     };
 
     handlePageChange = page => {
@@ -119,10 +120,10 @@ class Branches extends Form {
                                         <h5 className="text-muted">Imports</h5>
                                     </div>
                                     <div className="float-right">
-                                        <button className="btn btn-sm mx-1" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
+                                        <button className="btn btn-sm mx-1" onClick={this.handleOpenImport} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
                                             <Add style={{ fontSize: 18}} /> Create
                                         </button>
-                                        <button className="btn btn-sm mx-1" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#fff', color: '#0BB783'}}>
+                                        <button className="btn btn-sm mx-1"style={{ backgroundColor: '#fff', color: '#0BB783'}}>
                                             <InsertDriveFile style={{ fontSize: 18}} /> Reports
                                         </button>
                                     </div>
@@ -134,7 +135,7 @@ class Branches extends Form {
                     <div className="col-lg-5 my-3">
                         <div className="card border-0">
                             <div className="card-body">
-                                <Clearfix title="Branches Expense" />
+                                <h6 className="text-muted">Branches Expenses</h6>
                                 <ExpenseTable />
                             </div>
                         </div>
@@ -167,7 +168,7 @@ class Branches extends Form {
                     </DialogTitle>
                     <DialogContent>
                         {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}
-                        <DialogContentText className="mb-4 font-weight-bold">
+                        <DialogContent className="mb-4 font-weight-bold">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="col-md-6">
@@ -184,19 +185,19 @@ class Branches extends Form {
                                     </div>
                                 </div>
                             </form>
-                        </DialogContentText>
+                        </DialogContent>
                     </DialogContent>
                 </Dialog>
 
                 <Dialog open={this.state.openImport} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">
-                        Add Distribution
+                        Add Imports
                         <br/>
-                        <small style={{ color: '#C4B7B7'}}>You can add distribution to a branch.</small> 
+                        <small style={{ color: '#C4B7B7'}}>You can add an Import expense.</small> 
                     </DialogTitle>
                     <DialogContent>
                         {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}
-                        <DialogContentText className="mb-4 font-weight-bold">
+                        <DialogContent className="mb-4 font-weight-bold">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="col-md-6">
@@ -213,36 +214,7 @@ class Branches extends Form {
                                     </div>
                                 </div>
                             </form>
-                        </DialogContentText>
-                    </DialogContent>
-                </Dialog>
-                
-                <Dialog open={this.state.openImport} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">
-                        Add Distribution
-                        <br/>
-                        <small style={{ color: '#C4B7B7'}}>You can add distribution to a branch.</small> 
-                    </DialogTitle>
-                    <DialogContent>
-                        {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}
-                        <DialogContentText className="mb-4 font-weight-bold">
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        {this.renderSelect('branchId', 'Choose Branch', this.state.branches)}
-                                    </div>
-                                     <div className="col-md-6">
-                                        {this.renderSelect('productId', 'Choose Product', this.state.products)}
-                                    </div>
-                                    <div className="col-md-6">
-                                        {this.renderInput('quantity', 'Quantity')}
-                                    </div>
-                                    <div className="col-md-6">
-                                        {this.renderButton('Distribute')}
-                                    </div>
-                                </div>
-                            </form>
-                        </DialogContentText>
+                        </DialogContent>
                     </DialogContent>
                 </Dialog>
             </>

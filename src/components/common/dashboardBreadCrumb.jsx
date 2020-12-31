@@ -1,12 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Add, Refresh } from '@material-ui/icons';
 import Dialog from '@material-ui/core/Dialog';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Joi from 'joi-browser';
+import Form from './form';
+import { addBranch } from '../../services/branchService';
 
-class DashboardBreadCrumb extends Component {
-    state = {  
+class DashboardBreadCrumb extends Form {
+    state = {
+        data: { branchName: '', branchLocation: ''},
+        errors: {},
         open: false
+    }
+
+    schema = {
+        branchName: Joi.string().required().label('Branch name'),
+        branchLocation: Joi.string().required().label('Branch Location'),
     }
 
     handleOpen = () => {
@@ -14,6 +24,12 @@ class DashboardBreadCrumb extends Component {
     }
     handleClose = () => {
         this.setState({open: false})
+    }
+
+    doSubmit = async () => {
+        const {data} = await addBranch(this.state.data);
+        console.log(data);
+        this.setState({data: { branchName: '', branchLocation: ''}})
     }
 
     render() { 
@@ -40,16 +56,23 @@ class DashboardBreadCrumb extends Component {
                 </div>
                 <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">
-                        Branch
+                        <strong>Branch</strong>
                         <br/>
                         <small style={{ color: '#C4B7B7'}}>You can add a branch.</small> 
                     </DialogTitle>
-                    <DialogContentText className="mb-4 font-weight-bold">
-                        <div className="row">
-                            <div className="col-md-6"></div>
-                            <div className="col-md-6"></div>
-                        </div>
-                    </DialogContentText>
+                    <DialogContent className="m-4 font-weight-bold">
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    {this.renderInput('branchName', 'Branch name', '', 'Branch Name')}
+                                </div>
+                                <div className="col-md-6">
+                                {this.renderInput('branchLocation', 'Branch location', '', 'Branch Location')}
+                                </div>
+                            </div>
+                            {this.renderButton('Create Branch')}
+                        </form>
+                    </DialogContent>
                 </Dialog>
             </>
         );

@@ -6,5 +6,5 @@ export function addExpenses(expenses) {
 }
 
 export function viewExpenses() {
-    return http.get(apiUrl + '/viewAllMyExpenses');
+    return http.get(apiUrl + '/viewAllBranchExpenses');
 }

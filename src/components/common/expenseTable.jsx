@@ -1,95 +1,45 @@
-import React from 'react';
+import { Visibility } from '@material-ui/icons';
+import React, { useEffect, useState } from 'react';
+import { viewExpenses } from '../../services/expenseService';
 
 function ExpenseTable() {
+    const [expense, setExpense] = useState([]);
+    const populateExpense = async () => {
+        const {data} = await viewExpenses();
+        setExpense(data['all_branch_expenses']);
+    }
+    useEffect(() => {
+        populateExpense();
+    }, []);
+
     return (
         <div className="table-responsive">
             <table className="table table-hover">
                 <tbody>
-                   <tr>
-                        <td>
-                            <strong style={{ color: '#98AECA'}}># 1</strong>
-                        </td>
-                        <td>
-                            <small>
-                                <strong style={{ color: '#6D767E'}}>Soren Drouin</strong>
-                                <small className="font-weight-normal ml-3" style={{ color: '#7B838A'}}>18 Jan 2020</small> 
-                            </small>
-                            <br/>
-                            <small style={{ color: '#7B838A'}}>Completed "Design new idea"...</small>
-                        </td>
-                        <td>
-                            <small style={{ color: '#A4B0B7'}}>Project</small>
-                            <p style={{ color: '#8B9298'}}>Hyper MockUp</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong style={{ color: '#98AECA'}}># 1</strong>
-                        </td>
-                        <td>
-                            <small>
-                                <strong style={{ color: '#6D767E'}}>Soren Drouin</strong>
-                                <small className="font-weight-normal ml-3" style={{ color: '#7B838A'}}>18 Jan 2020</small> 
-                            </small>
-                            <br/>
-                            <small style={{ color: '#7B838A'}}>Completed "Design new idea"...</small>
-                        </td>
-                        <td>
-                            <small style={{ color: '#A4B0B7'}}>Project</small>
-                            <p style={{ color: '#8B9298'}}>Hyper MockUp</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong style={{ color: '#98AECA'}}># 1</strong>
-                        </td>
-                        <td>
-                            <small>
-                                <strong style={{ color: '#6D767E'}}>Soren Drouin</strong>
-                                <small className="font-weight-normal ml-3" style={{ color: '#7B838A'}}>18 Jan 2020</small> 
-                            </small>
-                            <br/>
-                            <small style={{ color: '#7B838A'}}>Completed "Design new idea"...</small>
-                        </td>
-                        <td>
-                            <small style={{ color: '#A4B0B7'}}>Project</small>
-                            <p style={{ color: '#8B9298'}}>Hyper MockUp</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong style={{ color: '#98AECA'}}># 1</strong>
-                        </td>
-                        <td>
-                            <small>
-                                <strong style={{ color: '#6D767E'}}>Soren Drouin</strong>
-                                <small className="font-weight-normal ml-3" style={{ color: '#7B838A'}}>18 Jan 2020</small> 
-                            </small>
-                            <br/>
-                            <small style={{ color: '#7B838A'}}>Completed "Design new idea"...</small>
-                        </td>
-                        <td>
-                            <small style={{ color: '#A4B0B7'}}>Project</small>
-                            <p style={{ color: '#8B9298'}}>Hyper MockUp</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong style={{ color: '#98AECA'}}># 1</strong>
-                        </td>
-                        <td>
-                            <small>
-                                <strong style={{ color: '#6D767E'}}>Soren Drouin</strong>
-                                <small className="font-weight-normal ml-3" style={{ color: '#7B838A'}}>18 Jan 2020</small> 
-                            </small>
-                            <br/>
-                            <small style={{ color: '#7B838A'}}>Completed "Design new idea"...</small>
-                        </td>
-                        <td>
-                            <small style={{ color: '#A4B0B7'}}>Project</small>
-                            <p style={{ color: '#8B9298'}}>Hyper MockUp</p>
-                        </td>
-                    </tr> 
+                    {expense.map(ex => (
+                        <tr>
+                            <td>
+                                <strong style={{ color: '#98AECA'}}># {ex.id}</strong>
+                            </td>
+                            <td>
+                                <small>
+                                    <strong style={{ color: '#6D767E'}}>{ex.branch.name}</strong>
+                                    <small className="font-weight-normal ml-3" style={{ color: '#7B838A'}}>{ex.created_at}</small> 
+                                </small>
+                                <br/>
+                                <small style={{ color: '#7B838A'}}>{ex.description}</small>
+                            </td>
+                            <td>
+                                <small style={{ color: '#A4B0B7'}}>Amount</small>
+                                <p style={{ color: '#8B9298'}}><small>Rwf</small> {ex.amount}</p>
+                            </td>
+                            <td className="pt-4">
+                                <a href="#" className="p-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}}>
+                                    <Visibility style={{ color: '#0BB783', fontSize: 18}} />
+                                </a>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
                     
             </table>

@@ -2,13 +2,13 @@ import React from 'react';
 import { ArrowUpward, Person, Apartment, ArrowDownward, Ballot, MonetizationOn, MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn } from '@material-ui/icons';
 import DashboardCard from '../common/dashboardCard';
 import DashboardNavbar from '../common/dashboardNavbar';
-import DashboardBreadCrumb from '../common/dashboardBreadCrumb';
 import OrderTable from '../common/distributionTable';
 import ProductTable from '../common/productTable';
 import DashboardIcon from '../../assets/images/dashboard.svg'
 import ExpenseTable from '../common/expenseTable';
 import ExpenseForm from '../common/expenseForm';
 import Charts from '../common/chart';
+import BranchProduct from '../common/branchProduct';
 
 const DashboardBM = () => {
     return (
@@ -104,39 +104,8 @@ const DashboardBM = () => {
                         <div className="col-lg-7">
                             <div className="card border-0">
                                 <div className="card-body">
-                                    <div className="clearfix mb-2">
-                                        <aside className="float-left">
-                                            <h6 className="mb-0" style={{ color: '#6c757d'}}>PRODUCTS</h6>
-                                            <small style={{ color: '#B5B6C5', fontSize: 12}}>
-                                                <strong>
-                                                    More than 400+ new Products
-                                                </strong>
-                                            </small>
-                                        </aside>
-                                        <aside className="float-right">
-                                            <div className="dropdown">
-                                                <a href="" id="dropdownMenuButton" data-toggle="dropdown">
-                                                    <MoreHoriz style={{ color: '#6c757d'}} />
-                                                </a>
-                                                <div className="dropdown-menu dropdown-menu-right border-0 shadow" aria-labelledby="dropdownMenuButton">
-                                                    <h6 className="dropdown-header">Quick actions</h6>
-                                                    <div className="dropdown-divider"></div>
-                                                    <a className="dropdown-item my-1" href="#">
-                                                        <Add style={{ color: '#8950FC', fontSize: 22 }} /> <span style={{ color: '#6B6D7B', fontSize: 15}}>New Product</span> 
-                                                    </a>
-                                                    <a className="dropdown-item my-1" href="#">
-                                                        <InsertDriveFile style={{ color: '#FFE5B3', fontSize: 22 }} /> <span style={{ color: '#6B6D7B', fontSize: 15}}>Generate report</span> 
-                                                    </a>
-                                                    <a className="dropdown-item my-1" href="#">
-                                                        <AssignmentTurnedIn style={{ color: '#1BC5BD', fontSize: 22 }} /> <span style={{ color: '#6B6D7B', fontSize: 15}}>Check projects</span> 
-                                                    </a>
-                                                    <div className="dropdown-divider"></div>
-                                                    <button className="btn mx-3 my-2 btn-sm" style={{ backgroundColor: '#D7F9EF', color: '#31C397'}}>More actions</button>
-                                                </div>
-                                            </div>
-                                        </aside>
-                                    </div>
-                                    <ProductTable />
+                                    <h6 className="text-muted">Our Stock</h6>
+                                    <BranchProduct />
                                 </div>
                             </div>
                         </div>
