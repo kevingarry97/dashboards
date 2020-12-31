@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -75,7 +75,7 @@ const DashboardAdmin = (props) => {
     const { window } = props;
     const classes = useStyles();
     const theme = useTheme();
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
     const Branch = useApi(getBranch);
     const Product = useApi(getProduct);
     const Expense = useApi(viewExpenses);
@@ -96,7 +96,6 @@ const DashboardAdmin = (props) => {
         <div>
             <div className={classes.toolbar} />
             <List>
-                
                 <NavLink to="/admin/overview" className="nav-link">
                     <ListItem>
                         <ListItemIcon>
@@ -152,87 +151,89 @@ const DashboardAdmin = (props) => {
     const container = window !== undefined ? () => window().document.body : undefined;
     
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        className={classes.menuButton}
-                    >
-                        <Menu />
-                    </IconButton>
-                    <div style={{ flexGrow: 1}}>
-                        
-                    </div>
-                    <div>
-                        <DashboardNavbar path="/logout" user={user} />
-                    </div>
-                </Toolbar>
-                
-            </AppBar>
-            <nav className={classes.drawer} aria-label="mailbox folders">
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                <Hidden smUp implementation="css">
-                    <Drawer
-                        container={container}
-                        variant="temporary"
-                        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                        open={mobileOpen}
-                        onClose={handleDrawerToggle}
-                        classes={{
+        <>
+            <div className={classes.root}>
+                <CssBaseline />
+                <AppBar position="fixed" className={classes.appBar}>
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={handleDrawerToggle}
+                            className={classes.menuButton}
+                        >
+                            <Menu />
+                        </IconButton>
+                        <div style={{ flexGrow: 1}}>
+                            
+                        </div>
+                        <div>
+                            <DashboardNavbar path="/logout" user={user} />
+                        </div>
+                    </Toolbar>
+                    
+                </AppBar>
+                <nav className={classes.drawer} aria-label="mailbox folders">
+                    {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                    <Hidden smUp implementation="css">
+                        <Drawer
+                            container={container}
+                            variant="temporary"
+                            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                            open={mobileOpen}
+                            onClose={handleDrawerToggle}
+                            classes={{
+                                paper: classes.drawerPaper,
+                            }}
+                            ModalProps={{
+                                keepMounted: true, // Better open performance on mobile.
+                            }}
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                    <Hidden xsDown implementation="css">
+                        <Drawer
+                            classes={{
                             paper: classes.drawerPaper,
-                        }}
-                        ModalProps={{
-                            keepMounted: true, // Better open performance on mobile.
-                        }}
-                    >
-                        {drawer}
-                    </Drawer>
-                </Hidden>
-                <Hidden xsDown implementation="css">
-                    <Drawer
-                        classes={{
-                        paper: classes.drawerPaper,
-                        }}
-                        variant="permanent"
-                        open
-                    >
-                        {drawer}
-                    </Drawer>
-                </Hidden>
-            </nav>
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <DashboardBreadCrumb />
-                <div className="row my-3">
-                    <div className="col-xl-3 my-2 col-sm-6">
-                        <DashboardCard average={6} value={Branch.data['branches']?.length} title="Branches" symbol={<Business style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
+                            }}
+                            variant="permanent"
+                            open
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                </nav>
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
+                    <DashboardBreadCrumb />
+                    <div className="row my-3">
+                        <div className="col-xl-3 my-2 col-sm-6">
+                            <DashboardCard average={6} value={Branch.data['branches']?.length} title="Branches" symbol={<Business style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
+                        </div>
+                        <div className="col-xl-3 my-2 col-sm-6">
+                            <DashboardCard average={24} value={Product.data['products']?.length} title="Expenses" symbol={<LocalAtm style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
+                        </div>
+                        <div className="col-xl-3 my-2 col-sm-6">
+                            <DashboardCard average={36} title="Users" symbol={<SupervisedUserCircle style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
+                        </div>
+                        <div className="col-xl-3 my-2 col-sm-6">
+                            <DashboardCard average={56} value={Product.data['products']?.length} title="Products" symbol={<ImportantDevices style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
+                        </div>
                     </div>
-                    <div className="col-xl-3 my-2 col-sm-6">
-                        <DashboardCard average={24} value={Product.data['products']?.length} title="Expenses" symbol={<LocalAtm style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
-                    </div>
-                    <div className="col-xl-3 my-2 col-sm-6">
-                        <DashboardCard average={36} title="Users" symbol={<SupervisedUserCircle style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
-                    </div>
-                    <div className="col-xl-3 my-2 col-sm-6">
-                        <DashboardCard average={56} value={Product.data['products']?.length} title="Products" symbol={<ImportantDevices style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
-                    </div>
-                </div>
-                <Switch>
-                    <Route path="/admin/overview" component={Overview} />
-                    <Route path="/admin/products" component={Products} />
-                    <Route path="/admin/branches" component={Branches} />
-                    <Route path="/admin/orders" component={Order} />
-                    <Route path="/admin/users" component={Users} />
-                    <Route path="/admin/reports" component={Reports} />
-                    <Redirect from="/admin" exact to="/admin/overview" />
-                </Switch>
-            </main>
-        </div>
+                    <Switch>
+                        <Route path="/admin/overview" component={Overview} />
+                        <Route path="/admin/products" component={Products} />
+                        <Route path="/admin/branches" component={Branches} />
+                        <Route path="/admin/orders" component={Order} />
+                        <Route path="/admin/users" component={Users} />
+                        <Route path="/admin/reports" component={Reports} />
+                        <Redirect from="/admin" exact to="/admin/overview" />
+                    </Switch>
+                </main>
+            </div>
+        </>
     );
 }
 export default DashboardAdmin;

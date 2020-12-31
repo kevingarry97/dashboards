@@ -16,7 +16,6 @@ const DashboardBM = () => {
             <DashboardNavbar path="/logout" bgColor="#181C32" />
             <section className="py-4 px-5" style={{ backgroundColor: '#f7f8fc'}}>
                 <div className="container-fluid px-5">
-                    <DashboardBreadCrumb />
                     <div className="row my-3">
                         <div className="col-lg-6">
                             <div className="row">
