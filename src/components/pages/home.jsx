@@ -1,9 +1,47 @@
 import React from 'react';
 import Navbar from '../navbar';
 import P1 from '../../assets/images/v1.svg';
-import P2 from '../../assets/images/v2.svg';
-import P3 from '../../assets/images/v3.svg';
+import v1 from '../../assets/images/p1.jpg';
+import C1 from '../../assets/images/c1.jpg';
+import C3 from '../../assets/images/c3.jpg';
+import P2 from '../../assets/images/p3.jpg';
+import C2 from '../../assets/images/c2.jpg';
+import P3 from '../../assets/images/products.jpg';
 import '../css/navbar.css';
+import { ArrowRightAlt } from '@material-ui/icons';
+
+const DATA = [
+    {
+        img: C1,
+        title: 'Rice',
+        price: '400'
+    },
+    {
+        img: v1,
+        title: 'Flavour',
+        price: '500'
+    },
+    {
+        img: C3,
+        title: 'Coffee',
+        price: '800'
+    },
+    {
+        img: P2,
+        title: 'Beans',
+        price: '1200'
+    },
+    {
+        img: C2,
+        title: 'Fruits',
+        price: '900'
+    },
+    {
+        img: P3,
+        title: 'HandCraft',
+        price: '1000'
+    },
+]
 
 const Home = () => {
     return (
@@ -12,39 +50,42 @@ const Home = () => {
             <Navbar />
             <div className="pt-5">
                 <div className="container pt-5">
-                    <div className="row pt-5">
-                        <div className="col-md-5 mt-5">
-                        <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-                            <ol className="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div className="carousel-inner">
-                                <div className="carousel-item active">
-                                    <img className="img-fluid" src={P1} alt="First slide" />
-                                </div>
-                                <div className="carousel-item">
-                                    <img className="img-fluid" src={P2} alt="Second slide" />
-                                </div>
-                                <div className="carousel-item">
-                                    <img className="img-fluid" src={P3} alt="Third slide" />
-                                </div>
-                            </div>
-                            <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span className="sr-only">Previous</span>
-                            </a>
-                            <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span className="sr-only">Next</span>
-                            </a>
+                    <div className="row">
+                        <div className="col-md-5 mt-2">
+                            <img src={P1} className="img-fluid" alt=""/>
                         </div>
-                        </div>
-                        <div className="col-md-7">
-                            
+                        <div className="col-md-6 offset-md-1 text-white mt-5">
+                            <h1>Our Company</h1>
+                            <p className="py-3">Sed officiis dolorum nihil saepe, atque facilis veritatis quas beatae fugit odio eius aliquid quisquam suscipit! Dolorem eaque eligendi laudantium molestias temporibus.</p>
+                            <button className="btn font-weight-bold text-white py-1 border">
+                                Get Started &nbsp;
+                                <ArrowRightAlt />
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="container mt-5">
+                <h2 className="text-center text-muted">Our Products</h2>
+                <div className="row mt-5 pt-3">
+                    {DATA.map(d => (
+                        <div className="col-md-3 my-3">
+                            <div className="card">
+                                <img src={d.img} className="img-fluid" alt=""/>
+                            </div>
+                            <div className="text-center mt-2">
+                                <h4 className="font-weight-bold text-muted">{d.title}</h4>
+                                <small className="font-weight-bold" style={{ color: "#727CF5"}}>Rwf {d.price}</small>
+                            </div>
+                        </div>
+                    ))}
+                    
+                </div>
+                
+            </div>
+            <div className="footer mt-4 mb-2">
+                <div className="container text-center">
+                    <small className="text-muted">© All rights reserved. Made by 2020 - 2021</small> 
                 </div>
             </div>
         </>
