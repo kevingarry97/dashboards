@@ -8,7 +8,7 @@ import * as Branch from '../services/branchService';
 import { viewImport } from '../services/importService';
 import { getProduct } from '../services/productService';
 import ExpenseForm from './common/expenseForm';
-import { Add, InsertDriveFile } from '@material-ui/icons';
+import { Add } from '@material-ui/icons';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -28,7 +28,6 @@ class Branches extends Form {
         imports: [],
         branches: [],
         openDistribution: false,
-        openImport: false,
         data: { branchId: '', productId: '', quantity: ''},
         errors: {},
         error: '',
@@ -38,9 +37,9 @@ class Branches extends Form {
     schema = {
         branchId: Joi.string().required().label("Branch"),
         productId: Joi.string().required().label("Product"),
-        quantity: Joi.string().required().label("Quantity"),
+        quantity: Joi.string().required().label("Quantity")
     }
-
+    
     async populateImport() {
         const {data} = await viewImport();
         this.setState({ imports: data['imports']})
@@ -69,14 +68,8 @@ class Branches extends Form {
         this.setState({ openDistribution: true })
     };
 
-    handleOpenImport = () => {
-        this.setState({ openImport: true })
-        console.log("Clicked")
-    };
-
     handleClose = () => {
         this.setState({ openDistribution: false })
-        this.setState({ openImport: false })
     };
 
     handlePageChange = page => {
@@ -124,19 +117,7 @@ class Branches extends Form {
                     <div className="col-lg-5 my-3">
                         <div className="card border-0">
                             <div className="card-body">
-                                <div className="clearfix">
-                                    <div className="float-left">
-                                        <h5 className="text-muted">Imports</h5>
-                                    </div>
-                                    <div className="float-right">
-                                        <button className="btn btn-sm mx-1" onClick={this.handleOpenImport} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
-                                            <Add style={{ fontSize: 18}} /> Create
-                                        </button>
-                                        <button className="btn btn-sm mx-1"style={{ backgroundColor: '#fff', color: '#0BB783'}}>
-                                            <InsertDriveFile style={{ fontSize: 18}} /> Reports
-                                        </button>
-                                    </div>
-                                </div>
+                                
                                 <ImportTable imports={imps} onClick={this.handleOpenImport} />
                                 <Pagination itemsCount={imports.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                             </div>
@@ -175,35 +156,6 @@ class Branches extends Form {
                         Add Distribution
                         <br/>
                         <small style={{ color: '#C4B7B7'}}>You can add distribution to a branch.</small> 
-                    </DialogTitle>
-                    <DialogContent>
-                        {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}
-                        <DialogContent className="mb-4 font-weight-bold">
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        {this.renderSelect('branchId', 'Choose Branch', this.state.branches)}
-                                    </div>
-                                     <div className="col-md-6">
-                                        {this.renderSelect('productId', 'Choose Product', this.state.products)}
-                                    </div>
-                                    <div className="col-md-6">
-                                        {this.renderInput('quantity', 'Quantity')}
-                                    </div>
-                                    <div className="col-md-6">
-                                        {this.renderButton('Distribute')}
-                                    </div>
-                                </div>
-                            </form>
-                        </DialogContent>
-                    </DialogContent>
-                </Dialog>
-
-                <Dialog open={this.state.openImport} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">
-                        Add Imports
-                        <br/>
-                        <small style={{ color: '#C4B7B7'}}>You can add an Import expense.</small> 
                     </DialogTitle>
                     <DialogContent>
                         {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}

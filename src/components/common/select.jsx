@@ -3,7 +3,7 @@ import React from 'react';
 const Select = ({name, label, options, error, ...rest}) => {
     return (  
         <div className="form-group">
-            <label htmlFor="">{label}</label>
+            <label style={{ color: "#888"}}>{label}</label>
             <select name={name} id={name} {...rest} className="custom-select my-1 mr-sm-2">
                 <option disabled value="">{label}</option>
                 {options && options.map(option => (
