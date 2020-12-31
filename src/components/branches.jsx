@@ -5,6 +5,7 @@ import ExpenseTable from './common/expenseTable';
 import OrderTable from './common/distributionTable';
 import { addDistribution, getDistribution, getSpecificDistribution, getDistributionSpecificProduct } from '../services/distributionService'
 import * as Branch from '../services/branchService';
+import { viewImport } from '../services/importService';
 import { getProduct } from '../services/productService';
 import ExpenseForm from './common/expenseForm';
 import { Add, InsertDriveFile } from '@material-ui/icons';
@@ -24,6 +25,7 @@ class Branches extends Form {
         pageSize: 2,
         distribution: [],
         products: [],
+        imports: [],
         branches: [],
         openDistribution: false,
         openImport: false,
@@ -37,6 +39,11 @@ class Branches extends Form {
         branchId: Joi.string().required().label("Branch"),
         productId: Joi.string().required().label("Product"),
         quantity: Joi.string().required().label("Quantity"),
+    }
+
+    async populateImport() {
+        const {data} = await viewImport();
+        this.setState({ imports: data['imports']})
     }
 
     async populateBranch() {
@@ -55,6 +62,7 @@ class Branches extends Form {
         this.setState({ loading: false })
         await this.populateProduct();
         await this.populateBranch();
+        await this.populateImport();
     }
 
     handleOpenDistribution = () => {
@@ -87,8 +95,9 @@ class Branches extends Form {
     }
 
     render() { 
-        const { currentPage, pageSize, distribution } = this.state;
+        const { currentPage, pageSize, distribution, imports } = this.state;
         const dists = paginate(distribution, currentPage, pageSize);
+        const imps = paginate(imports, currentPage, pageSize);
 
         return (
             <>
@@ -128,7 +137,8 @@ class Branches extends Form {
                                         </button>
                                     </div>
                                 </div>
-                                <ImportTable onClick={this.handleOpenImport} />
+                                <ImportTable imports={imps} onClick={this.handleOpenImport} />
+                                <Pagination itemsCount={imports.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                             </div>
                         </div>
                     </div>
