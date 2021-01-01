@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ArrowUpward, Person, Apartment, ArrowDownward, Ballot, MonetizationOn, MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn } from '@material-ui/icons';
+import { ArrowUpward, Person, Apartment, ArrowDownward, Ballot, MonetizationOn, MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn, ExitToApp } from '@material-ui/icons';
 import DashboardCard from '../common/dashboardCard';
 import DashboardNavbar from '../common/dashboardNavbar';
 import DashboardIcon from '../../assets/images/dashboard.svg'
@@ -9,6 +9,7 @@ import Charts from '../common/chart';
 import BranchProduct from '../common/branchProduct';
 import Form from '../common/form';
 import Joi from 'joi-browser';
+import { Link } from 'react-router-dom';
 
 class DashboardBM extends Form {
     state = {  
@@ -32,9 +33,23 @@ class DashboardBM extends Form {
     render() { 
         return (
             <>
-                <DashboardNavbar path="/logout" bgColor="#181C32" />
                 <section className="py-4 px-5" style={{ backgroundColor: '#f7f8fc'}}>
                     <div className="container-fluid px-5">
+                        <div className="clearfix mt-md-0 mt-5">
+                            <aside className="float-left">
+                                <small style={{ color: '#98AECB', fontSize: 11}}>OVERVIEW</small>
+                                <h5 style={{ color: '#6c757d'}}>Dashboard</h5>
+                            </aside>
+                            <aside className="float-right mt-3">
+                                <div className="media">
+                                    <Link to="/logout" className="btn btn-sm font-weight-bold px-3" style={{ backgroundColor: '#0BB783', color: '#fff'}} onClick={this.handleOpen}>
+                                        <ExitToApp /> &nbsp;&nbsp;
+                                        Logout
+                                    </Link>
+                                </div>
+                                
+                            </aside>
+                        </div>
                         <div className="row my-3">
                             <div className="col-lg-6">
                                 <div className="row">

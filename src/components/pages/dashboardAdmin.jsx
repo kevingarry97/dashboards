@@ -9,7 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward } from '@material-ui/icons';
+import { Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward, ExitToApp } from '@material-ui/icons';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 import DashboardNavbar from '../common/dashboardNavbar';
@@ -65,7 +65,8 @@ const useStyles = makeStyles((theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3)
     },
   }),
 );
@@ -144,6 +145,17 @@ const DashboardAdmin = (props) => {
                         <ListItemText primary="Reports" style={{ color: '#F4F5F6'}} />
                     </ListItem>
                 </NavLink>
+                <div style={{ position: 'fixed', bottom: '0%', width: "100%"}}>
+                    <NavLink to="/logout" className="nav-link d-flex">
+                        <ListItem>
+                            <ListItemIcon>
+                                <ExitToApp style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Log Out" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink>
+                </div>
+                
             </List>
         </div>
     );
@@ -154,7 +166,7 @@ const DashboardAdmin = (props) => {
         <>
             <div className={classes.root}>
                 <CssBaseline />
-                <AppBar position="fixed" className={classes.appBar}>
+                <AppBar position="fixed" className="d-md-none">
                     <Toolbar>
                         <IconButton
                             color="inherit"
@@ -165,14 +177,7 @@ const DashboardAdmin = (props) => {
                         >
                             <Menu />
                         </IconButton>
-                        <div style={{ flexGrow: 1}}>
-                            
-                        </div>
-                        <div>
-                            <DashboardNavbar path="/logout" user={user} />
-                        </div>
                     </Toolbar>
-                    
                 </AppBar>
                 <nav className={classes.drawer} aria-label="mailbox folders">
                     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}

@@ -35,8 +35,8 @@ class DashboardBreadCrumb extends Form {
     render() { 
         const {open} = this.state;
         return (
-            <>
-                <div className="clearfix">
+            <div style={{ marginTop: -35}}>
+                <div className="clearfix mt-md-0 mt-5">
                     <aside className="float-left">
                         <small style={{ color: '#98AECB', fontSize: 11}}>OVERVIEW</small>
                         <h5 style={{ color: '#6c757d'}}>Dashboard</h5>
@@ -74,7 +74,7 @@ class DashboardBreadCrumb extends Form {
                         </form>
                     </DialogContent>
                 </Dialog>
-            </>
+            </div>
         );
     }
 }

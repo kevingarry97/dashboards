@@ -12,7 +12,7 @@ function DashboardNavbar({bgColor, path, user}) {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item dropdown mx-2">
+                        {/* <li className="nav-item dropdown mx-2">
                             <a className="nav-link" href="#" id="newAction" role="button" data-toggle="dropdown">
                                 <NewReleases style={{ color: '#98A6AD', fontSize: 30}} />
                             </a>
@@ -70,19 +70,19 @@ function DashboardNavbar({bgColor, path, user}) {
                                 <div className="dropdown-divider"></div>
                                 
                             </div>
-                        </li>
+                        </li> */}
                         <li className="nav-item dropdown mx-2">
                             <a className="nav-link" href="#" id="userAccount" role="button" data-toggle="dropdown">
                                 
                                 <div className="media">
-                                    <Face style={{ color: '#98A6AD', fontSize: 30}} />
+                                    <Face style={{ color: '#c1c2c3', fontSize: 30}} />
                                     <div className="media-body ml-2">
                                         <p className="pt-1" style={{ fontWeight: '600', color: '#A7B3B9'}}>{user?.names} <small style={{color: '#A7B3B9'}}></small></p>
                                     </div>
                                 </div>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right border-0 shadow pt-3" aria-labelledby="userAccount">
-                                <a className="dropdown-item my-2" href="#">
+                                {/* <a className="dropdown-item my-2" href="#">
                                     <div className="media">
                                         <RecentActors style={{ color: '#0BB783', fontSize: 35}} />
                                         <div className="media-body pl-2">
@@ -104,7 +104,7 @@ function DashboardNavbar({bgColor, path, user}) {
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </a> */}
                                 <div className="dropdown-divider"></div>
                                 <Link to={path} className="dropdown-item" href="#">
                                     <div className="px-3 py-2 text-center" style={{ backgroundColor: '#F3F6F9', borderRadius: 35 }}>
