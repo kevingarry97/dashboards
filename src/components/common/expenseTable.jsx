@@ -1,29 +1,20 @@
+import React from 'react';
 import { Visibility } from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
-import { viewExpenses } from '../../services/expenseService';
 
-function ExpenseTable() {
-    const [expense, setExpense] = useState([]);
-    const populateExpense = async () => {
-        const {data} = await viewExpenses();
-        setExpense(data['all_branch_expenses']);
-    }
-    useEffect(() => {
-        populateExpense();
-    }, []);
+function ExpenseTable({expense}) {
 
     return (
         <div className="table-responsive">
             <table className="table table-hover">
                 <tbody>
                     {expense.map(ex => (
-                        <tr>
+                        <tr key={ex.id}>
                             <td>
                                 <strong style={{ color: '#98AECA'}}># {ex.id}</strong>
-                            </td>
+                            </td>   
                             <td>
                                 <small>
-                                    <strong style={{ color: '#6D767E'}}>{ex.branch.name}</strong>
+                                    <strong style={{ color: '#6D767E'}}>{ex.branch?.name}</strong>
                                     <small className="font-weight-normal ml-3" style={{ color: '#7B838A'}}>{ex.created_at}</small> 
                                 </small>
                                 <br/>

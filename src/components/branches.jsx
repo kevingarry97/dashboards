@@ -18,12 +18,14 @@ import SuccessMessage from './common/successMessage';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import ImportTable from './common/importTable';
+import { viewExpenses } from '../services/expenseService';
 
 class Branches extends Form {
     state = { 
         currentPage: 1,
-        pageSize: 2,
+        pageSize: 4,
         distribution: [],
+        expenses: [],
         products: [],
         imports: [],
         branches: [],
@@ -39,10 +41,15 @@ class Branches extends Form {
         productId: Joi.string().required().label("Product"),
         quantity: Joi.string().required().label("Quantity")
     }
-    
+
     async populateImport() {
         const {data} = await viewImport();
         this.setState({ imports: data['imports']})
+    }
+
+    async populateExpenses() {
+        const {data} = await viewExpenses();
+        this.setState({ expenses: data['all_branch_expenses']})
     }
 
     async populateBranch() {
@@ -62,6 +69,7 @@ class Branches extends Form {
         await this.populateProduct();
         await this.populateBranch();
         await this.populateImport();
+        await this.populateExpenses();
     }
 
     handleOpenDistribution = () => {
@@ -88,9 +96,10 @@ class Branches extends Form {
     }
 
     render() { 
-        const { currentPage, pageSize, distribution, imports } = this.state;
+        const { currentPage, pageSize, distribution, imports, expenses } = this.state;
         const dists = paginate(distribution, currentPage, pageSize);
         const imps = paginate(imports, currentPage, pageSize);
+        const exps = paginate(expenses, currentPage, pageSize);
 
         return (
             <>
@@ -117,7 +126,6 @@ class Branches extends Form {
                     <div className="col-lg-5 my-3">
                         <div className="card border-0">
                             <div className="card-body">
-                                
                                 <ImportTable imports={imps} onClick={this.handleOpenImport} />
                                 <Pagination itemsCount={imports.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                             </div>
@@ -127,7 +135,8 @@ class Branches extends Form {
                         <div className="card border-0">
                             <div className="card-body">
                                 <h6 className="text-muted">Branches Expenses</h6>
-                                <ExpenseTable />
+                                <ExpenseTable expense={exps} />
+                                <Pagination itemsCount={expenses.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                             </div>
                         </div>
                     </div>

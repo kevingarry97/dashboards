@@ -8,3 +8,7 @@ export function addExpenses(expenses) {
 export function viewExpenses() {
     return http.get(apiUrl + '/viewAllBranchExpenses');
 }
+
+export function viewBranchExpenses() {
+    return http.get(apiUrl + '/viewAllMyExpenses');
+}
