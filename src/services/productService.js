@@ -19,3 +19,7 @@ export function getProduct() {
 export function viewSpecificProduct(id) {
     return http.get(apiUrl + '/viewSpecificProduct/' + id);
 }
+
+export function viewBranchProduct() {
+    return http.get(apiUrl + '/viewAllMainProducts');
+}
