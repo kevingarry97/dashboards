@@ -11,8 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward, ExitToApp } from '@material-ui/icons';
 import Toolbar from '@material-ui/core/Toolbar';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
-import DashboardNavbar from '../common/dashboardNavbar';
+import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles';
 import DashboardCard from '../common/dashboardCard';
 import DashboardBreadCrumb from '../common/dashboardBreadCrumb';
 import { Switch, Route, Redirect, NavLink } from 'react-router-dom';
@@ -20,8 +19,6 @@ import Overview from '../overview';
 import Products from '../products';
 import Branches from '../branches';
 import Users from '../users';
-import { useSelector } from 'react-redux';
-import { getUser } from '../../store/auth';
 import Reports from '../reports';
 import useApi from '../../hooks/useApi';
 import { getBranch } from '../../services/branchService';
@@ -80,8 +77,6 @@ const DashboardAdmin = (props) => {
     const Branch = useApi(getBranch);
     const Product = useApi(getProduct);
     const Expense = useApi(viewExpenses);
-
-    const user = useSelector(getUser);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
