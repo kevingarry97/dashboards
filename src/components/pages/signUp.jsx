@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from 'react-helmet';
 import { Email, LockOpen, Person, Phone } from '@material-ui/icons';
 import SignUpIcon from '../../assets/images/signUp.svg';
 import '../css/signIn.css'
@@ -29,6 +30,11 @@ class SignUp extends Form {
 
     render() { 
         return (
+            <>
+            <Helmet>
+                <title>Sign Up</title>
+                <meta name="description" content="Awesome description" />
+            </Helmet>
             <section className="signInSection">
                 <div className="signUpCircle"></div>
                 <div className="container pt-md-5">
@@ -66,6 +72,7 @@ class SignUp extends Form {
                     </div>
                 </div>
             </section>
+            </>
         );
     }
 }

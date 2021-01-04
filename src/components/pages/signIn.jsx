@@ -1,5 +1,6 @@
 import React from 'react';
-import Joi from 'joi-browser'
+import Joi from 'joi-browser';
+import { Helmet } from 'react-helmet';
 import Form from '../common/form';
 import { Link } from 'react-router-dom';
 import { LockOpen, Phone } from '@material-ui/icons';
@@ -36,6 +37,11 @@ class SignIn extends Form {
     render() { 
 
         return (  
+            <>
+            <Helmet>
+                <title>Sign In</title>
+                <meta name="description" content="Awesome description" />
+            </Helmet>
             <section className="signInSection">
                 <div className="signInCircle"></div>
                 <div className="container pt-5">
@@ -69,7 +75,8 @@ class SignIn extends Form {
                         </div>
                     </div>
                 </div>
-            </section> 
+            </section>
+            </>
         );
     }
 }

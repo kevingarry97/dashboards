@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUpward, Person, Apartment, ArrowDownward, Ballot, MonetizationOn, MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn, ExitToApp } from '@material-ui/icons';
 import DashboardCard from '../common/dashboardCard';
+import { Helmet } from 'react-helmet';
 import DashboardIcon from '../../assets/images/dashboard.svg'
 import ExpenseTable from '../common/expenseTable';
 import ExpenseForm from '../common/expenseForm';
@@ -66,7 +67,11 @@ class DashboardBM extends Form {
         const exps = paginate(expenses, currentPage, pageSize);
 
         return (
-            <>
+            <>  
+                <Helmet>
+                    <title>Branch Manager</title>
+                    <meta name="description" content="Awesome description" />
+                </Helmet>
                 <section className="py-4 px-5" style={{ backgroundColor: '#f7f8fc'}}>
                     <div className="container-fluid px-5">
                         <div className="clearfix mt-md-0 mt-5">

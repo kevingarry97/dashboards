@@ -56,6 +56,7 @@ class ReceivedTable extends Form {
     
     doSubmit = async () => {
         const {data} = await addSubProduct(this.state.data);
+        console.log(this.state);
         this.setState({error: data.message})
         this.setState({data: { receivedQuantity: '', damagedQuantity: '', product_id: ''}})
     }

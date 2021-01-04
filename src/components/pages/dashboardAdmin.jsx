@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
+import { Helmet } from 'react-helmet';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
@@ -164,6 +164,10 @@ const DashboardAdmin = (props) => {
     
     return (
         <>
+            <Helmet>
+                <title>Administrator</title>
+                <meta name="description" content="Awesome description" />
+            </Helmet>
             <div className={classes.root}>
                 <CssBaseline />
                 <AppBar position="fixed" className="d-md-none">

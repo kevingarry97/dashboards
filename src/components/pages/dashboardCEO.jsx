@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Apartment, ArrowUpward, ExitToApp, InsertDriveFile, Visibility } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import DashboardCard from '../common/dashboardCard';
@@ -7,6 +8,11 @@ import ChartPie from '../common/chartPie';
 
 const DashboardCEO = () => {
     return (
+        <>
+        <Helmet>
+            <title>CEO</title>
+            <meta name="description" content="Awesome description" />
+        </Helmet>
         <section className="py-4 px-5" style={{ backgroundColor: '#f7f8fc'}}>
             <div className="container-fluid px-5">
                 <div className="clearfix mt-md-0 mt-5">
@@ -363,6 +369,7 @@ const DashboardCEO = () => {
                     
             </div>
         </section>
+        </>
     );
 }
 
