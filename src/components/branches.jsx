@@ -8,7 +8,7 @@ import * as Branch from '../services/branchService';
 import { viewImport } from '../services/importService';
 import { getProduct } from '../services/productService';
 import ExpenseForm from './common/expenseForm';
-import { Add } from '@material-ui/icons';
+import { Add, ViewAgenda } from '@material-ui/icons';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -112,8 +112,11 @@ class Branches extends Form {
                                         <h5 className="text-muted">Distributions</h5>
                                     </div>
                                     <div className="float-right">
-                                        <button className="btn btn-sm" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
+                                        <button className="btn btn-sm mx-2" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
                                             <Add style={{ fontSize: 18}} /> Create
+                                   </button>
+                                        <button className="btn btn-sm mx-2" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
+                                            <ViewAgenda style={{ fontSize: 18}} /> Distributions
                                         </button>
                                     </div>
                                 </div>
