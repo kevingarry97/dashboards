@@ -6,13 +6,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Joi from 'joi-browser';
 import { getProduct, viewSpecificProduct } from '../../services/productService';
 import Form from './form';
-import { addImport, viewSpecific } from '../../services/importService';
+import { addImport, viewImport, viewSpecific } from '../../services/importService';
 import SuccessMessage from '../common/successMessage';
+import Pagination from './pagination';
+import { paginate } from '../../utils/paginate';
 
 class ImportTable extends Form {
-    state = {  
+    state = { 
+        currentPage: 1,
+        pageSize: 4,
         data: { amount: '', description: '', productId: ''},
         errors: {},
+        importss: [],
         products: [],
         specificImport: [],
         error: '',
@@ -30,6 +35,11 @@ class ImportTable extends Form {
         const {data} = await getProduct();
         this.setState({ products: data['products']})
     }
+    
+    async populateImports() {
+        const {data} = await viewImport();
+        this.setState({ importss: data['imports']})
+    }
 
     handleOpenImport = () => {
         this.setState({openImport: true});
@@ -40,6 +50,10 @@ class ImportTable extends Form {
         const {data} = await viewSpecific(id);
         this.setState({specificImport: data['expenses']});
         console.log(data['expenses']);
+    }
+
+    handlePageChange = page => {
+        this.setState({currentPage: page});
     }
 
     handleClose = () => {
@@ -55,12 +69,14 @@ class ImportTable extends Form {
 
     async componentDidMount() {
         await this.populateProducts();
+        await this.populateImports();
     }
     
 
     render() { 
         const {imports} = this.props;
-        const {specificImport} = this.state;
+        const {specificImport, importss, currentPage, pageSize} = this.state;
+        const imps = paginate(importss, currentPage, pageSize)
         return (
             <>
                 <div className="clearfix">
@@ -79,7 +95,7 @@ class ImportTable extends Form {
                 <div className="table-responsive my-3">
                     <table className="table table-hover">
                         <tbody>
-                            {imports && imports.map(imp => (
+                            {imps && imps.map(imp => (
                                 <tr key={imp.id}>
                                     <td>
                                         <small style={{ color: '#98AECA'}}># {imp.id}</small>
@@ -108,6 +124,7 @@ class ImportTable extends Form {
                         </tbody>
                     </table>
                 </div>
+                <Pagination itemsCount={importss.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                 <Dialog open={this.state.openImport} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">
                         Add Imports

@@ -3,12 +3,12 @@ import Charts from './common/chart';
 import Clearfix from './common/clearfix';
 import ExpenseTable from './common/expenseTable';
 import OrderTable from './common/distributionTable';
-import { addDistribution, getDistribution, getSpecificDistribution, getDistributionSpecificProduct } from '../services/distributionService'
+import { addDistribution, getDistribution } from '../services/distributionService'
 import * as Branch from '../services/branchService';
 import { viewImport } from '../services/importService';
 import { getProduct } from '../services/productService';
 import ExpenseForm from './common/expenseForm';
-import { Add, ViewAgenda } from '@material-ui/icons';
+import { Add } from '@material-ui/icons';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -18,16 +18,13 @@ import SuccessMessage from './common/successMessage';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import ImportTable from './common/importTable';
-import { viewExpenses } from '../services/expenseService';
 
 class Branches extends Form {
     state = { 
         currentPage: 1,
         pageSize: 4,
         distribution: [],
-        expenses: [],
         products: [],
-        imports: [],
         branches: [],
         openDistribution: false,
         viewDistribution: false,
@@ -41,16 +38,6 @@ class Branches extends Form {
         branchId: Joi.string().required().label("Branch"),
         productId: Joi.string().required().label("Product"),
         quantity: Joi.string().required().label("Quantity")
-    }
-
-    async populateImport() {
-        const {data} = await viewImport();
-        this.setState({ imports: data['imports']})
-    }
-
-    async populateExpenses() {
-        const {data} = await viewExpenses();
-        this.setState({ expenses: data['all_branch_expenses']})
     }
 
     async populateBranch() {
@@ -69,8 +56,6 @@ class Branches extends Form {
         this.setState({ loading: false })
         await this.populateProduct();
         await this.populateBranch();
-        await this.populateImport();
-        await this.populateExpenses();
     }
 
     handleOpenDistribution = () => {
@@ -103,10 +88,8 @@ class Branches extends Form {
     }
 
     render() { 
-        const { currentPage, pageSize, distribution, imports, expenses } = this.state;
+        const { currentPage, pageSize, distribution } = this.state;
         const dists = paginate(distribution, currentPage, pageSize);
-        const imps = paginate(imports, currentPage, pageSize);
-        const exps = paginate(expenses, currentPage, pageSize);
 
         return (
             <>
@@ -121,9 +104,6 @@ class Branches extends Form {
                                     <div className="float-right">
                                         <button className="btn btn-sm mx-2" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
                                             <Add style={{ fontSize: 18}} /> Create
-                                   </button>
-                                        <button className="btn btn-sm mx-2" onClick={() => this.handleViewDistribution()} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
-                                            <ViewAgenda style={{ fontSize: 18}} /> Distributions
                                         </button>
                                     </div>
                                 </div>
@@ -136,8 +116,7 @@ class Branches extends Form {
                     <div className="col-lg-5 my-3">
                         <div className="card border-0">
                             <div className="card-body">
-                                <ImportTable imports={imps} onClick={this.handleOpenImport} />
-                                <Pagination itemsCount={imports.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
+                                <ImportTable onClick={this.handleOpenImport} />
                             </div>
                         </div>
                     </div>
@@ -145,8 +124,7 @@ class Branches extends Form {
                         <div className="card border-0">
                             <div className="card-body">
                                 <h6 className="text-muted">Branches Expenses</h6>
-                                <ExpenseTable expense={exps} />
-                                <Pagination itemsCount={expenses.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
+                                <ExpenseTable />
                             </div>
                         </div>
                     </div>

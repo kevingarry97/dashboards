@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Visibility } from '@material-ui/icons';
 import { Dialog, DialogContent, DialogTitle } from '@material-ui/core';
 import { getSpecificBranch } from '../../services/branchService';
+import Pagination from './pagination';
+import { viewExpenses } from '../../services/expenseService';
+import { paginate } from '../../utils/paginate';
 
-function ExpenseTable({expense}) {
+function ExpenseTable({expense, exs}) {
     const [open, setOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(2);
+    const [expenses, setExpenses] = useState([]);
     const [branch, setBranch] = useState({});
 
     const handleOpen = async (id) => {
@@ -13,15 +19,30 @@ function ExpenseTable({expense}) {
         setBranch(data);
     }
 
+    const handlePageChange = page => {
+        setCurrentPage(page);
+    }
+
     const handleClose = () => {
         setOpen(false);
     }
+
+    async function populateExpense() {
+        const {data} = await viewExpenses();
+        setExpenses(data['all_branch_expenses']);
+    }
+
+    useEffect(() => {
+        populateExpense();
+    }, []);
+
+    const exps = paginate(expenses, currentPage, pageSize);
     return (
         <>
             <div className="table-responsive">
                 <table className="table table-hover">
                     <tbody>
-                        {expense.map(ex => (
+                        {exps.map(ex => (
                             <tr key={ex.id}>
                                 <td>
                                     <strong style={{ color: '#98AECA'}}># {ex.id}</strong>
@@ -48,6 +69,7 @@ function ExpenseTable({expense}) {
                     </tbody>
                 </table>
             </div>
+            <Pagination itemsCount={expenses.length} currentPage={currentPage} pageSize={pageSize} onPageChange={handlePageChange} />
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
                     Branches
