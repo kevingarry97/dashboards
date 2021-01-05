@@ -22,19 +22,14 @@ class SignIn extends Form {
     }
 
     doSubmit = async () => {
-        try {
-            const { data } = this.state;
-            const response = await login(data.phone_no, data.password);
-            
-            window.location = "/admin";
-            this.setState({data: {phone_no: '', password: ''}});
-          } catch (ex) {
-            if (ex.response && ex.response.status === 400) {
-              const errors = { ...this.state.errors };
-              errors.phone_no = ex.response.data;
-              this.setState({ errors });
-            }
-        }
+        const { data } = this.state;
+        const { data: jwt } = await login(data.phone_no, data.password);
+        if(jwt.error) return this.setState({ error: jwt.error});
+
+        localStorage.setItem("token", jwt);
+        window.location = "/admin";
+        this.setState({data: {phone_no: '', password: ''}});
+        
     }
     render() { 
 
