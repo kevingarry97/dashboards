@@ -30,6 +30,7 @@ class Branches extends Form {
         imports: [],
         branches: [],
         openDistribution: false,
+        viewDistribution: false,
         data: { branchId: '', productId: '', quantity: ''},
         errors: {},
         error: '',
@@ -76,8 +77,14 @@ class Branches extends Form {
         this.setState({ openDistribution: true })
     };
 
+    handleViewDistribution = (id) => {
+        this.setState({viewDistribution: true});
+        console.log(id)
+    }
+
     handleClose = () => {
-        this.setState({ openDistribution: false })
+        this.setState({ openDistribution: false });
+        this.setState({viewDistribution: false});
     };
 
     handlePageChange = page => {
@@ -115,7 +122,7 @@ class Branches extends Form {
                                         <button className="btn btn-sm mx-2" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
                                             <Add style={{ fontSize: 18}} /> Create
                                    </button>
-                                        <button className="btn btn-sm mx-2" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
+                                        <button className="btn btn-sm mx-2" onClick={() => this.handleViewDistribution()} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
                                             <ViewAgenda style={{ fontSize: 18}} /> Distributions
                                         </button>
                                     </div>
@@ -189,6 +196,16 @@ class Branches extends Form {
                                 </div>
                             </form>
                         </DialogContent>
+                    </DialogContent>
+                </Dialog>
+                <Dialog open={this.state.viewDistribution} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">
+                        Add Distribution
+                        <br/>
+                        <small style={{ color: '#C4B7B7'}}>You can add distribution to a branch.</small> 
+                    </DialogTitle>
+                    <DialogContent>
+                        <p>Hello</p>
                     </DialogContent>
                 </Dialog>
             </>

@@ -57,18 +57,17 @@ function ExpenseTable({expense}) {
                     <h6 className="font-weight-bold text-muted mb-3">About Branch ?</h6>
                     <div className="clearfix">
                         <div className="float-left mr-5 pr-5">
-                            <small className="text-muted">Owner: <strong style={{ color: '#98AECA'}}>{branch.user.full_Names}</strong></small>
+                            <small className="text-muted">Owner: <strong style={{ color: '#98AECA'}}>{branch.user?.full_Names}</strong></small>
                             <br/>
-                            <small className="text-muted">Email: <strong style={{ color: '#98AECA'}}>{branch.user.email}</strong></small>
+                            <small className="text-muted">Email: <strong style={{ color: '#98AECA'}}>{branch.user?.email}</strong></small>
                             <br/>
-                            <small className="text-muted">Phone: <strong style={{ color: '#98AECA'}}>{branch.user.phone_no}</strong></small>
+                            <small className="text-muted">Phone: <strong style={{ color: '#98AECA'}}>{branch.user?.phone_no}</strong></small>
                         </div>
                         <div className="float-right ml-5 pl-5">
                             <small className="text-muted">Branch name: <strong style={{ color: '#98AECA'}}>{branch.name}</strong></small>
                             <br/>
                             <small className="text-muted">Location: <strong style={{ color: '#98AECA'}}>{branch.location}</strong></small>
                         </div>
-
                     </div>
                 </DialogContent>
             </Dialog>
