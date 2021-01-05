@@ -7,11 +7,13 @@ import { LockOpen, Phone } from '@material-ui/icons';
 import SignUp from '../../assets/images/signUp.svg';
 import { login } from '../../services/auth';
 import '../css/signIn.css'
+import SuccessMessage from '../common/successMessage';
 
 class SignIn extends Form {
     state = { 
         data: { phone_no: '', password: ''},
-        errors: {}
+        errors: {},
+        error: ''
     }
 
     schema = {
@@ -22,8 +24,8 @@ class SignIn extends Form {
     doSubmit = async () => {
         try {
             const { data } = this.state;
-            await login(data.phone_no, data.password);
-      
+            const response = await login(data.phone_no, data.password);
+            
             window.location = "/admin";
             this.setState({data: {phone_no: '', password: ''}});
           } catch (ex) {
@@ -56,6 +58,7 @@ class SignIn extends Form {
                         </div>
                         <div className="col-md-5 offset-md-3 text-center mt-5 pt-5">
                             <h2 className="text-muted mt-5 mb-5">Sign in</h2>
+                            {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}
                             <form onSubmit={this.handleSubmit}>
                                 {this.renderInput('phone_no', 'Phone number', <Phone />)}
                                 {this.renderInput('password', 'Password', <LockOpen />, '', 'password')}

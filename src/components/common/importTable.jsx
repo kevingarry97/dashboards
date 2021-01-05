@@ -120,7 +120,6 @@ class ImportTable extends Form {
                                     </td>
                                 </tr>
                             ))}
-                            
                         </tbody>
                     </table>
                 </div>
