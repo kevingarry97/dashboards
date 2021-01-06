@@ -18,8 +18,7 @@ const Routes = () => {
             <Route path="/admin" render={(props) => {
                 if(!user) return <Redirect to="/signIn" />
                 if(user.role === 'Customer') return <Redirect to="/home" />
-                if(user.role === 'BranchManager') return <Redirect to="/adminBM" />
-                if(user.role === 'Administrator') return <DashboardAdmin {...props} />
+                return <DashboardAdmin {...props} />
             }} />
             {!user && <Route path="/signIn" component={SignIn} />}
             {user && user.role === 'Customer' && <Route path="/home" component={Home} />}

@@ -9,7 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { StarBorder, ExpandLess, ExpandMore, Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward, ExitToApp, AccountBalance, AllInbox, DirectionsBoat } from '@material-ui/icons';
+import { Apartment, Ballot, MonetizationOn, MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn, ExpandLess, ExpandMore, Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward, ExitToApp, AccountBalance, AllInbox, DirectionsBoat } from '@material-ui/icons';
 import Toolbar from '@material-ui/core/Toolbar';
 import Collapse from '@material-ui/core/Collapse';
 import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles';
@@ -28,6 +28,11 @@ import { viewExpenses } from '../../services/expenseService';
 import Order from '../order';
 import ImportsReports from '../importsReports';
 import DistributionsReports from '../distributionsReport';
+import { getCurrentUser } from '../../services/auth';
+import Charts from '../common/chart';
+import BmOverview from '../bmOverview';
+import BmOrders from '../bmOrders';
+import BmExpenses from '../bmExpenses';
 
 const drawerWidth = 240;
 
@@ -84,6 +89,7 @@ const DashboardAdmin = (props) => {
     const Branch = useApi(getBranch);
     const Product = useApi(getProduct);
     const Expense = useApi(viewExpenses);
+    const user = getCurrentUser();
 
     const handleClick = () => {
         setOpen(!open);
@@ -103,87 +109,156 @@ const DashboardAdmin = (props) => {
         <div>
             <div className={classes.toolbar} />
             <List>
-                <NavLink to="/admin/overview" className="nav-link">
-                    <ListItem>
-                        <ListItemIcon>
-                            <Dashboard style={{ color: '#fff', fontSize: 30}} />
-                        </ListItemIcon>
-                        <ListItemText primary="Dashboard" style={{ color: '#F4F5F6'}} />
-                    </ListItem>
-                </NavLink>   
-                <NavLink to="/admin/products" className="nav-link">
-                    <ListItem>
-                        <ListItemIcon>
-                            <ImportantDevices style={{ color: '#fff', fontSize: 30}} />
-                        </ListItemIcon>
-                        <ListItemText primary="Products" style={{ color: '#F4F5F6'}} />
-                    </ListItem>
-                </NavLink>
-                <NavLink to="/admin/branches" className="nav-link">
-                    <ListItem>
-                        <ListItemIcon>
-                            <Business style={{ color: '#fff', fontSize: 30}} />
-                        </ListItemIcon>
-                        <ListItemText primary="Branches" style={{ color: '#F4F5F6'}} />
-                    </ListItem>
-                </NavLink>
-                <NavLink to="/admin/orders" className="nav-link">
-                    <ListItem>
-                        <ListItemIcon>
-                            <ViewQuilt style={{ color: '#fff', fontSize: 30}} />
-                        </ListItemIcon>
-                        <ListItemText primary="Orders" style={{ color: '#F4F5F6'}} />
-                    </ListItem>
-                </NavLink>
-                <div className="nav-link">
-                    <ListItem button onClick={handleClick}>
-                        <ListItemIcon>
-                            <Assessment style={{ color: '#fff', fontSize: 30}} />
-                        </ListItemIcon>
-                        <ListItemText primary="Reports" style={{ color: '#F4F5F6'}} />
-                        {open ? <ExpandLess style={{ color: '#F4F5F6'}} /> : <ExpandMore style={{ color: '#F4F5F6'}} />}
-                    </ListItem>
-                </div> 
-                <Collapse in={open} timeout="auto" unmountOnExit style={{ backgroundColor: "#232931"}}>
-                    <NavLink to="/admin/reports" className="nav-link">
-                        <List component="div" disablePadding>
-                            <ListItem button className={classes.nested}>
-                                <ListItemIcon>
-                                    <AccountBalance style={{ color: '#fff', fontSize: 25}} />
-                                </ListItemIcon>
-                                <ListItemText primary="Sales" style={{ color: '#F4F5F6'}} />
-                            </ListItem>
-                        </List>
-                    </NavLink>
-                    <NavLink to="/admin/imports"  className="nav-link">
-                        <List component="div" disablePadding>
-                            <ListItem button className={classes.nested}>
-                                <ListItemIcon>
-                                    <DirectionsBoat style={{ color: '#fff', fontSize: 25}} />
-                                </ListItemIcon>
-                                <ListItemText primary="Imports" style={{ color: '#F4F5F6'}} />
-                            </ListItem>
-                        </List>
-                    </NavLink>
-                    <NavLink to="/admin/distributions"  className="nav-link">
-                        <List component="div" disablePadding>
-                            <ListItem button className={classes.nested}>
-                                <ListItemIcon>
-                                    <AllInbox style={{ color: '#fff', fontSize: 25}} />
-                                </ListItemIcon>
-                                <ListItemText primary="Distributions" style={{ color: '#F4F5F6'}} />
-                            </ListItem>
-                        </List>
+                {user.role === 'BranchManager' && <>
+                    <NavLink to="/admin/branchOverview" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <Dashboard style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Dashboard" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
                     </NavLink>   
-                </Collapse>
-                <NavLink to="/admin/users" className="nav-link">
-                    <ListItem>
-                        <ListItemIcon>
-                            <Person style={{ color: '#fff', fontSize: 30}} />
-                        </ListItemIcon>
-                        <ListItemText primary="Users" style={{ color: '#F4F5F6'}} />
-                    </ListItem>
-                </NavLink>
+                    <NavLink to="/admin/branchOrders" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <ImportantDevices style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Orders" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink>
+                    <NavLink to="/admin/branchExpenses" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <ImportantDevices style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Expenses" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink>
+                    <div className="nav-link">
+                        <ListItem button onClick={handleClick}>
+                            <ListItemIcon>
+                                <Assessment style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Reports" style={{ color: '#F4F5F6'}} />
+                            {open ? <ExpandLess style={{ color: '#F4F5F6'}} /> : <ExpandMore style={{ color: '#F4F5F6'}} />}
+                        </ListItem>
+                    </div> 
+                    <Collapse in={open} timeout="auto" unmountOnExit style={{ backgroundColor: "#232931"}}>
+                        <NavLink to="/admin/reports" className="nav-link">
+                            <List component="div" disablePadding>
+                                <ListItem button className={classes.nested}>
+                                    <ListItemIcon>
+                                        <AccountBalance style={{ color: '#fff', fontSize: 25}} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Sales" style={{ color: '#F4F5F6'}} />
+                                </ListItem>
+                            </List>
+                        </NavLink>
+                        <NavLink to="/admin/imports"  className="nav-link">
+                            <List component="div" disablePadding>
+                                <ListItem button className={classes.nested}>
+                                    <ListItemIcon>
+                                        <DirectionsBoat style={{ color: '#fff', fontSize: 25}} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Imports" style={{ color: '#F4F5F6'}} />
+                                </ListItem>
+                            </List>
+                        </NavLink>
+                        <NavLink to="/admin/distributions"  className="nav-link">
+                            <List component="div" disablePadding>
+                                <ListItem button className={classes.nested}>
+                                    <ListItemIcon>
+                                        <AllInbox style={{ color: '#fff', fontSize: 25}} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Distributions" style={{ color: '#F4F5F6'}} />
+                                </ListItem>
+                            </List>
+                        </NavLink>   
+                    </Collapse>
+                </>}
+                {user.role === 'Administrator' && <> 
+                    <NavLink to="/admin/overview" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <Dashboard style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Dashboard" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink>   
+                    <NavLink to="/admin/products" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <ImportantDevices style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Products" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink>
+                    <NavLink to="/admin/branches" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <Business style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Branches" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink>
+                    <NavLink to="/admin/orders" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <ViewQuilt style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Orders" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink>
+                    <div className="nav-link">
+                        <ListItem button onClick={handleClick}>
+                            <ListItemIcon>
+                                <Assessment style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Reports" style={{ color: '#F4F5F6'}} />
+                            {open ? <ExpandLess style={{ color: '#F4F5F6'}} /> : <ExpandMore style={{ color: '#F4F5F6'}} />}
+                        </ListItem>
+                    </div> 
+                    <Collapse in={open} timeout="auto" unmountOnExit style={{ backgroundColor: "#232931"}}>
+                        <NavLink to="/admin/reports" className="nav-link">
+                            <List component="div" disablePadding>
+                                <ListItem button className={classes.nested}>
+                                    <ListItemIcon>
+                                        <AccountBalance style={{ color: '#fff', fontSize: 25}} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Sales" style={{ color: '#F4F5F6'}} />
+                                </ListItem>
+                            </List>
+                        </NavLink>
+                        <NavLink to="/admin/imports"  className="nav-link">
+                            <List component="div" disablePadding>
+                                <ListItem button className={classes.nested}>
+                                    <ListItemIcon>
+                                        <DirectionsBoat style={{ color: '#fff', fontSize: 25}} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Imports" style={{ color: '#F4F5F6'}} />
+                                </ListItem>
+                            </List>
+                        </NavLink>
+                        <NavLink to="/admin/distributions"  className="nav-link">
+                            <List component="div" disablePadding>
+                                <ListItem button className={classes.nested}>
+                                    <ListItemIcon>
+                                        <AllInbox style={{ color: '#fff', fontSize: 25}} />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Distributions" style={{ color: '#F4F5F6'}} />
+                                </ListItem>
+                            </List>
+                        </NavLink>   
+                    </Collapse>
+                    <NavLink to="/admin/users" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <Person style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Users" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink> 
+                </>}
                 <div style={{ position: 'fixed', bottom: '0%', width: "100%"}}>
                     <NavLink to="/logout" className="nav-link d-flex">
                         <ListItem>
@@ -194,7 +269,6 @@ const DashboardAdmin = (props) => {
                         </ListItem>
                     </NavLink>
                 </div>
-                
             </List>
         </div>
     );
@@ -203,7 +277,7 @@ const DashboardAdmin = (props) => {
     return (
         <>
             <Helmet>
-                <title>Administrator</title>
+                <title>Dashboard</title>
                 <meta name="description" content="Awesome description" />
             </Helmet>
             <div className={classes.root}>
@@ -254,32 +328,103 @@ const DashboardAdmin = (props) => {
                 </nav>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <DashboardBreadCrumb />
-                    <div className="row my-3">
-                        <div className="col-xl-3 my-2 col-sm-6">
-                            <DashboardCard average={6} value={Branch.data['branches']?.length} title="Branches" symbol={<Business style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
+                    {user.role === 'BranchManager' && <>
+                        <div className="row my-3">
+                            <div className="col-lg-6">
+                                <div className="row">
+                                    <div className="col-sm-6 my-2">
+                                        <DashboardCard 
+                                            average={36}
+                                            title="Branches"
+                                            symbol={<Apartment style={{ color: '#727CF5'}} />}
+                                            percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />}
+                                            color="#0adf97"
+                                        />
+                                    </div>
+                                    <div className="col-sm-6 my-2">
+                                        <DashboardCard 
+                                            average={5}
+                                            title="Products"
+                                            symbol={<Ballot style={{ color: '#727CF5'}} />}
+                                            percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />}
+                                            color="#fa5c7c"
+                                        />
+                                    </div>
+                                    <div className="col-sm-6 my-2">
+                                        <DashboardCard 
+                                            average={23}
+                                            title="Expenses"
+                                            symbol={<MonetizationOn style={{ color: '#727CF5'}} />}
+                                            percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />}
+                                            color="#0adf97"
+                                        />
+                                    </div>
+                                    <div className="col-sm-6 my-2">
+                                        <DashboardCard 
+                                            average={12}
+                                            title="Users"
+                                            symbol={<Person style={{ color: '#727CF5'}} />}
+                                            percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />}
+                                            color="#0adf97"
+                                        />
+                                    </div>
+                                </div>
+                            </div> 
+                            <div className="col-lg-6">
+                                <div className="card border-0 my-2">
+                                    <div className="card-body">
+                                        <div className="clearfix mb-4">
+                                            <aside className="float-left">
+                                                <h6 className="mb-0" style={{ color: '#6c757d'}}>PROJECTIONS VS ACTUALS</h6>
+                                                <small style={{ color: '#B5B6C5', fontSize: 12}}>
+                                                </small>
+                                            </aside>
+                                        </div>
+                                        <div className="d-flex justify-content-center">
+                                            <Charts width={600} height={230} />
+                                        </div>      
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <Switch>
+                            <Route path="/admin/branchOverview" component={BmOverview} />
+                            <Route path="/admin/branchOrders" component={BmOrders} />
+                            <Route path="/admin/branchExpenses" component={BmExpenses} />
+                            <Route path="/admin/reports" component={Reports} />
+                            <Route path="/admin/imports" component={ImportsReports} />
+                            <Route path="/admin/distributions" component={DistributionsReports} />
+                            <Redirect from="/admin" exact to="/admin/branchOverview" />
+                        </Switch>
+                    </>}
+                    {user.role === 'Administrator' && <>
+                        <DashboardBreadCrumb />
+                        <div className="row my-3">
+                            <div className="col-xl-3 my-2 col-sm-6">
+                                <DashboardCard average={6} value={Branch.data['branches']?.length} title="Branches" symbol={<Business style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
+                            </div>
+                            <div className="col-xl-3 my-2 col-sm-6">
+                                <DashboardCard average={24} value={Product.data['products']?.length} title="Expenses" symbol={<LocalAtm style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
+                            </div>
+                            <div className="col-xl-3 my-2 col-sm-6">
+                                <DashboardCard average={36} title="Users" symbol={<SupervisedUserCircle style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
+                            </div>
+                            <div className="col-xl-3 my-2 col-sm-6">
+                                <DashboardCard average={56} value={Product.data['products']?.length} title="Products" symbol={<ImportantDevices style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
+                            </div>
                         </div>
-                        <div className="col-xl-3 my-2 col-sm-6">
-                            <DashboardCard average={24} value={Product.data['products']?.length} title="Expenses" symbol={<LocalAtm style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
-                        </div>
-                        <div className="col-xl-3 my-2 col-sm-6">
-                            <DashboardCard average={36} title="Users" symbol={<SupervisedUserCircle style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
-                        </div>
-                        <div className="col-xl-3 my-2 col-sm-6">
-                            <DashboardCard average={56} value={Product.data['products']?.length} title="Products" symbol={<ImportantDevices style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
-                        </div>
-                    </div>
-                    <Switch>
-                        <Route path="/admin/overview" component={Overview} />
-                        <Route path="/admin/products" component={Products} />
-                        <Route path="/admin/branches" component={Branches} />
-                        <Route path="/admin/orders" component={Order} />
-                        <Route path="/admin/users" component={Users} />
-                        <Route path="/admin/reports" component={Reports} />
-                        <Route path="/admin/imports" component={ImportsReports} />
-                        <Route path="/admin/distributions" component={DistributionsReports} />
-                        <Redirect from="/admin" exact to="/admin/overview" />
-                    </Switch>
+                        <Switch>
+                            <Route path="/admin/overview" component={Overview} />
+                            <Route path="/admin/products" component={Products} />
+                            <Route path="/admin/branches" component={Branches} />
+                            <Route path="/admin/orders" component={Order} />
+                            <Route path="/admin/users" component={Users} />
+                            <Route path="/admin/reports" component={Reports} />
+                            <Route path="/admin/imports" component={ImportsReports} />
+                            <Route path="/admin/distributions" component={DistributionsReports} />
+                            <Redirect from="/admin" exact to="/admin/overview" />
+                        </Switch>
+                    </>}
                 </main>
             </div>
         </>

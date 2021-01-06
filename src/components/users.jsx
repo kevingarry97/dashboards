@@ -46,10 +46,23 @@ class Users extends Form {
     }
 
     doSubmit = async () => {
-        const {data} = await Manager.registerManager(this.state.data);
-        this.setState({ error: data.message})
-        this.setState({data:{ names: '', phone_no: '', email: '', password: '', password_confirmation: '', branchId: ''}})
+        console.log(this.state.data);
+        // try {
+        //     const response = await addDistribution(this.state.data);
+        //     this.setState({error: response.data.message});
+        //     this.setState({data: { branchId: '', productId: '', quantity: ''}})
+        // } catch (error) {
+        //     console.log('Error Message:', error.message);
+        // }
+        
     }
+
+    // doSubmit = () => {
+    //     // console.log(this.state.data);
+    //     // const {data} = await Manager.registerManager(this.state.data);
+    //     // this.setState({ error: data.message})
+    //     // this.setState({data:{ names: '', phone_no: '', email: '', password: '', password_confirmation: '', branchId: ''}})
+    // }
 
     render() { 
         const { currentPage, pageSize, managers } = this.state;
