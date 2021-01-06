@@ -5,7 +5,6 @@ import ExpenseTable from './common/expenseTable';
 import OrderTable from './common/distributionTable';
 import { addDistribution, getDistribution } from '../services/distributionService'
 import * as Branch from '../services/branchService';
-import { viewImport } from '../services/importService';
 import { getProduct } from '../services/productService';
 import ExpenseForm from './common/expenseForm';
 import { Add } from '@material-ui/icons';
@@ -52,6 +51,7 @@ class Branches extends Form {
     async componentDidMount() {
         this.setState({ loading: true}) 
         const { data } = await getDistribution();
+        console.log(data)
         this.setState({ distribution: data['distributions']})
         this.setState({ loading: false })
         await this.populateProduct();

@@ -5,7 +5,7 @@
   background-color: #727cf5;
   clip-path: circle(36.9% at 68% 0);
 }
-.homeNavbar > .nav-link {
+.homeNavbar .nav-link {
   color: #727cf5 !important;
   font-size: 16px;
   font-weight: 600;

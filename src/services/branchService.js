@@ -9,6 +9,10 @@ export function getBranch() {
     return http.get(apiUrl + '/viewAllBranches');
 }
 
+export function viewAllBranches() {
+    return http.get(apiUrl + '/allBranches');
+}
+
 export function getSpecificBranch(id) {
     return http.get(apiUrl + '/viewSpecificBranch/' + id);
 }

@@ -20,6 +20,10 @@ export function viewSpecificProduct(id) {
     return http.get(apiUrl + '/viewSpecificProduct/' + id);
 }
 
+export function getAllProducts() {
+    return http.get(apiUrl + '/getAllProducts');
+}
+
 export function viewBranchProduct() {
     return http.get(apiUrl + '/viewAllMainProducts');
 }
