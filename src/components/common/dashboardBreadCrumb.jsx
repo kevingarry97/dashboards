@@ -35,7 +35,7 @@ class DashboardBreadCrumb extends Form {
     render() { 
         const {open} = this.state;
         return (
-            <div style={{ marginTop: -35}}>
+            <div className="mb-3" style={{ marginTop: -35}}>
                 <div className="clearfix mt-md-0 mt-5">
                     <aside className="float-left">
                         <small style={{ color: '#98AECB', fontSize: 11}}>OVERVIEW</small>
