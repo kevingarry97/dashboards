@@ -5,7 +5,7 @@ import Form from './common/form';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import { Add } from '@material-ui/icons';
-import ExpenseTable from './common/expenseTable';
+import BranchExpense from './common/branchExpense';
 
 class BmExpenses extends Form {
     state = {  
@@ -26,7 +26,6 @@ class BmExpenses extends Form {
     async populateExpenses() {
         const {data} = await viewBranchExpenses();
         this.setState({expenses: data['my_expenses']});
-        console.log(data);
     }
 
     async componentDidMount() {
@@ -57,7 +56,7 @@ class BmExpenses extends Form {
                                     </button>
                                 </div>
                             </div>                 
-                            <ExpenseTable expense={exps} />
+                            <BranchExpense expense={exps} />
                             <Pagination itemsCount={expenses.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                         </div>
                     </div>

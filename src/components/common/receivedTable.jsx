@@ -1,11 +1,7 @@
 import React from 'react';
-import { Add, InsertDriveFile } from '@material-ui/icons';
-import { Dialog, DialogContent, DialogTitle } from '@material-ui/core';
-import SuccessMessage from './successMessage';
+import { InsertDriveFile } from '@material-ui/icons';
 import Form from './form';
-import Joi from 'joi-browser';
-import { viewBranchProduct } from '../../services/productService';
-import { addSubProduct, getSubProduct } from '../../services/subProduct';
+import { getSubProduct } from '../../services/subProduct';
 import Pagination from './pagination';
 import { paginate } from '../../utils/paginate';
 

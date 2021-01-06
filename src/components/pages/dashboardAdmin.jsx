@@ -399,20 +399,6 @@ const DashboardAdmin = (props) => {
                     </>}
                     {user.role === 'Administrator' && <>
                         <DashboardBreadCrumb />
-                        <div className="row my-3">
-                            <div className="col-xl-3 my-2 col-sm-6">
-                                <DashboardCard average={6} value={Branch.data['branches']?.length} title="Branches" symbol={<Business style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
-                            </div>
-                            <div className="col-xl-3 my-2 col-sm-6">
-                                <DashboardCard average={24} value={Product.data['products']?.length} title="Expenses" symbol={<LocalAtm style={{ color: '#727CF5'}} />} percentage={<ArrowDownward style={{ fontSize: 18, color: '#fa5c7c', marginTop: 3}} />} color="#fa5c7c" />
-                            </div>
-                            <div className="col-xl-3 my-2 col-sm-6">
-                                <DashboardCard average={36} title="Users" symbol={<SupervisedUserCircle style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
-                            </div>
-                            <div className="col-xl-3 my-2 col-sm-6">
-                                <DashboardCard average={56} value={Product.data['products']?.length} title="Products" symbol={<ImportantDevices style={{ color: '#727CF5'}} />} percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />} color="#0adf97" />
-                            </div>
-                        </div>
                         <Switch>
                             <Route path="/admin/overview" component={Overview} />
                             <Route path="/admin/products" component={Products} />
