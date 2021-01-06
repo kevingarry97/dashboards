@@ -21,10 +21,6 @@ import Products from '../products';
 import Branches from '../branches';
 import Users from '../users';
 import Reports from '../reports';
-import useApi from '../../hooks/useApi';
-import { getBranch } from '../../services/branchService';
-import { getProduct } from '../../services/productService';
-import { viewExpenses } from '../../services/expenseService';
 import Order from '../order';
 import ImportsReports from '../importsReports';
 import DistributionsReports from '../distributionsReport';
@@ -86,9 +82,6 @@ const DashboardAdmin = (props) => {
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [open, setOpen] = useState(false);
-    const Branch = useApi(getBranch);
-    const Product = useApi(getProduct);
-    const Expense = useApi(viewExpenses);
     const user = getCurrentUser();
 
     const handleClick = () => {
@@ -98,12 +91,6 @@ const DashboardAdmin = (props) => {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
-    useEffect(() => {
-        Branch.request();
-        Product.request();
-        Expense.request();
-    }, [])
 
     const drawer = (
         <div>

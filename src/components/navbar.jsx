@@ -27,7 +27,7 @@ const Navbar = () => {
                     </ul>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className="nav-link" to="/signIn">
+                            <Link to="/signIn">
                                 <PersonPin />
                             </Link>
                         </li>
