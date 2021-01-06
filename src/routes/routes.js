@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import DashboardAdmin from '../components/pages/dashboardAdmin';
-import DashboardBM from '../components/pages/dashboardBM';
 import Home from '../components/pages/home';
 import SignIn from '../components/pages/signIn';
 import Logout from '../components/common/logout';
@@ -22,7 +21,6 @@ const Routes = () => {
             }} />
             {!user && <Route path="/signIn" component={SignIn} />}
             {user && user.role === 'Customer' && <Route path="/home" component={Home} />}
-            {user && user.role === 'BranchManager' && <Route path="/adminBM" component={DashboardBM} />}
             {user && user.role === 'Administrator' && <Redirect to="/admin" />}
             <Redirect from="/" exact to="/signIn" />
             <Redirect to="/signIn" />
