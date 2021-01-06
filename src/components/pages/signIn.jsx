@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import Form from '../common/form';
 import { Link } from 'react-router-dom';
 import { LockOpen, Phone } from '@material-ui/icons';
-import SignUp from '../../assets/images/signUp.svg';
+import SignUp from '../../assets/images/dashboard.svg';
 import { login } from '../../services/auth';
 import '../css/signIn.css'
 import SuccessMessage from '../common/successMessage';
@@ -45,7 +45,9 @@ class SignIn extends Form {
                     <div className="row">
                         <div className="col-md-4 text-center mt-md-5">
                             <h2 className="text-white my-md-3">New User ?</h2>
-                            <p style={{ color: '#fff', fontWeight: '600' }}>Magni recusandae aliquam rem illum reiciendis eum. Ratione reprehenderit fuga in tempore, velit iure autem repudiandae? Magni recusandae non enim officia veritatis.</p>
+                            <p style={{ color: '#fff' }}>
+                                With the account you can order packs with the most trusted company in Rwanda.
+                            </p>
                             <Link to="/signUp" className="btn btn-block font-weight-bold py-2" style={{ color: '#fff', borderStyle: 'solid', borderWidth: 3, borderColor: '#fff', borderRadius: 30}}>Sign Up</Link>
                             <div className="pt-5 mt-5 d-none d-md-block">
                                 <img src={SignUp} className="img-fluid my-2" />

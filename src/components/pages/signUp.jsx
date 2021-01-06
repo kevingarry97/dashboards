@@ -6,13 +6,14 @@ import '../css/signIn.css'
 import { Link } from 'react-router-dom';
 import Form from '../common/form';
 import Joi from 'joi-browser';
-import { connect } from 'react-redux';
-import { registerUser } from '../../store/auth';
+import { register } from '../../services/userService';
+import SuccessMessage from '../common/successMessage';
 
 class SignUp extends Form {
     state = {  
         data: {names: '', phone_no: '', email: '', password: '', password_confirmation: ''},
-        errors: {}
+        errors: {},
+        error: ''
     }
 
     schema = {
@@ -23,8 +24,9 @@ class SignUp extends Form {
         password_confirmation: Joi.string().required().label('Confirm Password')
     }
 
-    doSubmit = () => {
-        this.props.registerUser(this.state.data);
+    doSubmit = async () => {
+        const {data} = await register(this.state.data);
+        this.setState({error: data.message});
         this.setState({data: {names: '', phone_no: '', email: '', password: '', password_confirmation: ''}});
     }
 
@@ -41,6 +43,7 @@ class SignUp extends Form {
                     <div className="row mt-md-5">
                         <div className="col-md-6 text-center mt-md-5">
                             <h2 className="text-muted mb-5">Sign up</h2>
+                            {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}
                             <form onSubmit={this.handleSubmit}>
                                 {this.renderInput('names', 'Full names', <Person />)}
                                 {this.renderInput('phone_no', 'Phone number', <Phone />, '', 'number')}
@@ -77,8 +80,4 @@ class SignUp extends Form {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    registerUser: (user) => dispatch(registerUser(user))
-});
-
-export default connect(null, mapDispatchToProps)(SignUp);
+export default SignUp;
