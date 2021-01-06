@@ -9,8 +9,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward, ExitToApp } from '@material-ui/icons';
+import { StarBorder, ExpandLess, ExpandMore, Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward, ExitToApp, AccountBalance, AllInbox, DirectionsBoat } from '@material-ui/icons';
 import Toolbar from '@material-ui/core/Toolbar';
+import Collapse from '@material-ui/core/Collapse';
 import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles';
 import DashboardCard from '../common/dashboardCard';
 import DashboardBreadCrumb from '../common/dashboardBreadCrumb';
@@ -25,6 +26,8 @@ import { getBranch } from '../../services/branchService';
 import { getProduct } from '../../services/productService';
 import { viewExpenses } from '../../services/expenseService';
 import Order from '../order';
+import ImportsReports from '../importsReports';
+import DistributionsReports from '../distributionsReport';
 
 const drawerWidth = 240;
 
@@ -53,6 +56,9 @@ const useStyles = makeStyles((theme) =>
         display: 'none',
       },
     },
+    nested: {
+        paddingLeft: theme.spacing(4),
+    },
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
@@ -74,10 +80,15 @@ const DashboardAdmin = (props) => {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [open, setOpen] = useState(false);
     const Branch = useApi(getBranch);
     const Product = useApi(getProduct);
     const Expense = useApi(viewExpenses);
 
+    const handleClick = () => {
+        setOpen(!open);
+    };
+    
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -124,20 +135,53 @@ const DashboardAdmin = (props) => {
                         <ListItemText primary="Orders" style={{ color: '#F4F5F6'}} />
                     </ListItem>
                 </NavLink>
+                <div className="nav-link">
+                    <ListItem button onClick={handleClick}>
+                        <ListItemIcon>
+                            <Assessment style={{ color: '#fff', fontSize: 30}} />
+                        </ListItemIcon>
+                        <ListItemText primary="Reports" style={{ color: '#F4F5F6'}} />
+                        {open ? <ExpandLess style={{ color: '#F4F5F6'}} /> : <ExpandMore style={{ color: '#F4F5F6'}} />}
+                    </ListItem>
+                </div> 
+                <Collapse in={open} timeout="auto" unmountOnExit style={{ backgroundColor: "#232931"}}>
+                    <NavLink to="/admin/reports" className="nav-link">
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <AccountBalance style={{ color: '#fff', fontSize: 25}} />
+                                </ListItemIcon>
+                                <ListItemText primary="Sales" style={{ color: '#F4F5F6'}} />
+                            </ListItem>
+                        </List>
+                    </NavLink>
+                    <NavLink to="/admin/imports"  className="nav-link">
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <DirectionsBoat style={{ color: '#fff', fontSize: 25}} />
+                                </ListItemIcon>
+                                <ListItemText primary="Imports" style={{ color: '#F4F5F6'}} />
+                            </ListItem>
+                        </List>
+                    </NavLink>
+                    <NavLink to="/admin/distributions"  className="nav-link">
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <AllInbox style={{ color: '#fff', fontSize: 25}} />
+                                </ListItemIcon>
+                                <ListItemText primary="Distributions" style={{ color: '#F4F5F6'}} />
+                            </ListItem>
+                        </List>
+                    </NavLink>   
+                </Collapse>
                 <NavLink to="/admin/users" className="nav-link">
                     <ListItem>
                         <ListItemIcon>
                             <Person style={{ color: '#fff', fontSize: 30}} />
                         </ListItemIcon>
                         <ListItemText primary="Users" style={{ color: '#F4F5F6'}} />
-                    </ListItem>
-                </NavLink>
-                <NavLink to="/admin/reports" className="nav-link">
-                    <ListItem>
-                        <ListItemIcon>
-                            <Assessment style={{ color: '#fff', fontSize: 30}} />
-                        </ListItemIcon>
-                        <ListItemText primary="Reports" style={{ color: '#F4F5F6'}} />
                     </ListItem>
                 </NavLink>
                 <div style={{ position: 'fixed', bottom: '0%', width: "100%"}}>
@@ -156,7 +200,6 @@ const DashboardAdmin = (props) => {
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
-    
     return (
         <>
             <Helmet>
@@ -233,6 +276,8 @@ const DashboardAdmin = (props) => {
                         <Route path="/admin/orders" component={Order} />
                         <Route path="/admin/users" component={Users} />
                         <Route path="/admin/reports" component={Reports} />
+                        <Route path="/admin/imports" component={ImportsReports} />
+                        <Route path="/admin/distributions" component={DistributionsReports} />
                         <Redirect from="/admin" exact to="/admin/overview" />
                     </Switch>
                 </main>

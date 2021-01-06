@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpward, Person, Apartment, ArrowDownward, Ballot, MonetizationOn, MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn, ExitToApp } from '@material-ui/icons';
+import { ArrowUpward, Person, Apartment, ArrowDownward, Ballot, MonetizationOn, MoreHoriz, Refresh, Add, InsertDriveFile, AssignmentTurnedIn, ExitToApp } from '@material-ui/icons';
 import DashboardCard from '../common/dashboardCard';
 import { Helmet } from 'react-helmet';
 import DashboardIcon from '../../assets/images/dashboard.svg'
@@ -86,6 +86,9 @@ class DashboardBM extends Form {
                                         Logout
                                     </Link>
                                 </div>
+                                <a href="" className="ml-3 pt-1 pb-2 px-3 shadow-sm" style={{ backgroundColor: '#0BB783', borderRadius: 5}} onClick={() => window.location = '/'}>
+                                    <Refresh style={{ color: '#fff', fontSize: 20}} />
+                                </a>
                             </aside>
                         </div>
                         <div className="row my-3">

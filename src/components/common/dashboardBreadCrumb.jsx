@@ -47,9 +47,9 @@ class DashboardBreadCrumb extends Form {
                                 <Add /> 
                                 Create Branch
                             </button>
-                            <div className="ml-3 pt-1 pb-2 px-3 shadow-sm" style={{ backgroundColor: '#0BB783', borderRadius: 5}}>
+                            <a href="" className="ml-3 pt-1 pb-2 px-3 shadow-sm" style={{ backgroundColor: '#0BB783', borderRadius: 5}} onClick={() => window.location = '/'}>
                                 <Refresh style={{ color: '#fff', fontSize: 20}} />
-                            </div>
+                            </a>
                         </div>
                         
                     </aside>

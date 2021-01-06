@@ -3,19 +3,20 @@ import React, { Component } from 'react';
 export default class Report extends Component {
     render() {
         return (
-            <div className="container mt-5 text-muted">
+            <div className="container mt-3 text-muted">
+                <u><h3 className="font-weight-bold text-center">{this.props.title}</h3></u>
                 <div className="clearfix">
                     <div className="float-left">
-                    <h4 className="mb-0">My Company</h4>
-                    <small>Company Slogan</small>
+                        <h4 className="mb-0">My Company</h4>
+                        <small>Company Slogan</small>
                     </div>
                     <div className="float-right">
-                    <h3>Statement</h3>
-                    <small><strong>Date: </strong></small>
-                    <br />
-                    <small><strong>Amount: </strong></small>
-                    <br />
-                    <small><strong>Customer ID: </strong></small>
+                        <h3>Statement</h3>
+                        <small><strong>Date: </strong></small>
+                        <br />
+                        <small><strong>Amount: </strong></small>
+                        <br />
+                        <small><strong>Customer ID: </strong></small>
                     </div>
                 </div>
                 <div className="clearfix mt-3">
@@ -42,38 +43,7 @@ export default class Report extends Component {
                     <small style={{ fontSize: 12}}>Payment Due date:</small>
                     </div>
                 </div>
-                <div className="table-responsive mt-3">
-                    <table class="table table-bordered">
-                    <thead className="table-sm">
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                    </table>
-                </div>
+                {this.props.tbs}
             
                 <div className="bg-primary pb-4 pt-1 pr-3 my-3">
                     <h6 className="float-right text-white">Account Current balance <span className="mx-4">$</span> 17,000</h6>

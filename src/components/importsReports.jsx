@@ -3,7 +3,7 @@ import { useReactToPrint } from 'react-to-print';
 import Report from './common/report';
 import { Print } from '@material-ui/icons';
 
-const Reports = ({tbs}) => {
+const ImportsReports = ({tbs}) => {
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
       content: () => componentRef.current,
@@ -12,7 +12,7 @@ const Reports = ({tbs}) => {
     return (
         <div className="card border-0 card-body">
             <Report
-                title="Sales Report"
+                title="Imports Report"
                 tbs={
                     <div className="table-responsive mt-3">
                         <table class="table table-bordered">
@@ -59,4 +59,4 @@ const Reports = ({tbs}) => {
     );
 };
 
-export default Reports;
+export default ImportsReports;

@@ -10,6 +10,7 @@ import { addImport, viewImport, viewSpecific } from '../../services/importServic
 import SuccessMessage from '../common/successMessage';
 import Pagination from './pagination';
 import { paginate } from '../../utils/paginate';
+import Reports from '../reports';
 
 class ImportTable extends Form {
     state = { 
@@ -54,6 +55,7 @@ class ImportTable extends Form {
 
     handlePageChange = page => {
         this.setState({currentPage: page});
+        
     }
 
     handleClose = () => {
