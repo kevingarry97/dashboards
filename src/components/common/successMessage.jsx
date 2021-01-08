@@ -1,9 +1,13 @@
+import { Cancel } from '@material-ui/icons';
 import React from 'react';
 
-const SuccessMessage = ({message, className}) => {
+const SuccessMessage = ({message, className, handleClose}) => {
     return (
-        <div className={"border-0 shadow alert " + className}>
-            {message}
+        <div className={"clearfix border-0 shadow alert " + className}>
+            <div className="float-left">{message}</div>
+            <div className="float-right" onClick={handleClose}>
+                <Cancel />
+            </div>
         </div>
     );
 }

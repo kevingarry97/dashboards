@@ -4,12 +4,14 @@ import Form from './common/form';
 import Joi from 'joi-browser';
 import { viewBranchProduct } from '../services/productService';
 import { addSubProduct } from '../services/subProduct';
+import SuccessMessage from '../components/common/successMessage';
 
 class BmOverview extends Form {
     state = {  
         products: [],
         data: { receivedQuantity: '', damagedQuantity: '', product_id: ''},
-        errors: {}
+        errors: {},
+        error: ''
     }
 
     schema = {
@@ -29,7 +31,7 @@ class BmOverview extends Form {
     
     doSubmit = async () => {
         const {data} = await addSubProduct(this.state.data);
-        this.setState({error: data.message})
+        this.setState({error: data['message']});
         this.setState({data: { receivedQuantity: '', damagedQuantity: '', product_id: ''}})
     }
 
@@ -39,6 +41,7 @@ class BmOverview extends Form {
                 <div className="row my-3">
                     <div className="col-lg-5">
                         <div className="card border-0 card-body">
+                            {this.state.error && <SuccessMessage message={this.state.error} className="alert-success" />}
                             <form onSubmit={this.handleSubmit}>
                                 {this.renderInput('receivedQuantity', 'Received', '', 'Received', 'number')}
                                 {this.renderInput('damagedQuantity', 'Damaged', '', 'Damaged', 'number')}

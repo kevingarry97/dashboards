@@ -51,22 +51,22 @@ class ReceivedTable extends Form {
                                     <td>
                                         <strong style={{ color: '#98AECA'}}>{r.product.name}</strong></td>
                                     <td>
-                                        <small>Rwf {r.receivedQuantity}</small>
+                                        <small>{r.receivedQuantity}</small>
                                         <br/>
                                         <small style={{ color: '#98AECA'}}>Quantity Received</small>
                                     </td>
                                     <td>
-                                        <small>Rwf {r.soldQuantity}</small>
+                                        <small>{r.soldQuantity}</small>
                                         <br/>
                                         <small style={{ color: '#98AECA'}}>Sold Quantity</small>
                                     </td>
                                     <td>
-                                        <small>Rwf {r.damagedQuantity}</small>
+                                        <small>{r.damagedQuantity}</small>
                                         <br/>
                                         <small style={{ color: '#98AECA'}}>Damaged Quantity</small>
                                     </td>
                                     <td>
-                                        <small>Rwf {r.remainingQuantity}</small>
+                                        <small>{r.remainingQuantity}</small>
                                         <br/>
                                         <small style={{ color: '#98AECA'}}>Remaining Quantity</small>
                                     </td>

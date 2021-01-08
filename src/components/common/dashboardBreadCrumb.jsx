@@ -6,11 +6,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Joi from 'joi-browser';
 import Form from './form';
 import { addBranch } from '../../services/branchService';
+import SuccessMessage from './successMessage';
 
 class DashboardBreadCrumb extends Form {
     state = {
         data: { branchName: '', branchLocation: ''},
         errors: {},
+        error: '',
         open: false
     }
 
@@ -24,11 +26,12 @@ class DashboardBreadCrumb extends Form {
     }
     handleClose = () => {
         this.setState({open: false})
+        this.setState({error: ''});
     }
 
     doSubmit = async () => {
-        const {data} = await addBranch(this.state.data);
-        console.log(data);
+        const response = await addBranch(this.state.data);
+        console.log(response);
         this.setState({data: { branchName: '', branchLocation: ''}})
     }
 
@@ -61,6 +64,7 @@ class DashboardBreadCrumb extends Form {
                         <small style={{ color: '#C4B7B7'}}>You can add a branch.</small> 
                     </DialogTitle>
                     <DialogContent className="m-4 font-weight-bold">
+                        {this.state.error && <SuccessMessage message={this.state.error} className="alert-success" handleClose={this.handleClose} />}
                         <form onSubmit={this.handleSubmit}>
                             <div className="row">
                                 <div className="col-md-6">

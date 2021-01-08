@@ -6,6 +6,7 @@ import P2 from '../../assets/images/p3.jpg';
 import C2 from '../../assets/images/c2.jpg';
 import P3 from '../../assets/images/products.jpg';
 import '../css/navbar.css';
+import Img from '../../assets/images/brand.jpeg';
 import { getAllProducts } from '../../services/productService';
 import Navbar from '../common/navbar';
 import { viewAllBranches } from '../../services/branchService';
@@ -94,8 +95,23 @@ const Home = () => {
                 <meta name="description" content="Awesome description" />
             </Helmet>
             <Navbar />
-            <div className="container-fluid mt-5">
-                <h4 className="font-weight-bold text-center">Available Products</h4>
+            <section className="bg-white py-5">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-7">
+                            <h4 className="font-weight-bold" style={{ color: '#0BB783'}}>TOKA TRADING Ltd,</h4>
+                            <p className="text-muted pt-2" style={{ fontSize: 15, lineHeight: '1.8em'}}>We import goods and beverages, from neighbouring <br/> 
+                            countries and sell them to our local country 
+                            </p>
+                            <button className="btn px-3 py-2" style={{ backgroundColor: "#0BB783", color: "#fff"}}>Get Started</button>
+                        </div>
+                        <div className="col-md-4 offset-md-1">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div className="container-fluid mt-4">
+                <h4 className="font-weight-bold text-center pt-3">Available Products</h4>
                 <p className="text-center" style={{color: '#677788'}}>All products below are available in the branch allocated</p>
                 <div className="row mt-5">
                     <div className="col-md-3 my-2">

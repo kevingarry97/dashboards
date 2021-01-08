@@ -1,5 +1,5 @@
 import React from 'react';
-import { Add, InsertDriveFile,Visibility } from '@material-ui/icons';
+import { Add, Edit, InsertDriveFile,Visibility } from '@material-ui/icons';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -11,6 +11,7 @@ import SuccessMessage from '../common/successMessage';
 import Pagination from './pagination';
 import { paginate } from '../../utils/paginate';
 import Reports from '../reports';
+import { Link } from 'react-router-dom';
 
 class ImportTable extends Form {
     state = { 
@@ -63,6 +64,16 @@ class ImportTable extends Form {
         this.setState({openView: false});
     }
 
+    // mapToViewModel(movie) {
+    //     return {
+    //       _id: movie._id,
+    //       title: movie.title,
+    //       genreId: movie.genre._id,
+    //       numberInStock: movie.numberInStock,
+    //       dailyRentalRate: movie.dailyRentalRate,
+    //     };
+    // }
+
     doSubmit = async () => {
         const {data} = await addImport(this.state.data);
         this.setState({ error: data.message});
@@ -83,12 +94,12 @@ class ImportTable extends Form {
             <>
                 <div className="clearfix">
                     <div className="float-left">
-                        <h5 className="text-muted">Imports</h5>
+                    <button className="btn btn-sm mx-1" onClick={this.handleOpenImport} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
+                            <Add style={{ fontSize: 18}} /> Create Imports
+                        </button>
                     </div>
                     <div className="float-right">
-                        <button className="btn btn-sm mx-1" onClick={this.handleOpenImport} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
-                            <Add style={{ fontSize: 18}} /> Create
-                        </button>
+                        
                         <button className="btn btn-sm mx-1"style={{ backgroundColor: '#fff', color: '#0BB783'}}>
                             <InsertDriveFile style={{ fontSize: 18}} /> Reports
                         </button>
@@ -116,9 +127,12 @@ class ImportTable extends Form {
                                         <small style={{ color: '#98AECA'}}>Description</small>
                                     </td>
                                     <td>
-                                        <a href="#" className="p-2" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}} onClick={() => this.handleOpenView(imp.product.id)}>
+                                        <a className="p-2 mx-1" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}} onClick={() => this.handleOpenView(imp.product.id)}>
                                             <Visibility style={{ color: '#0BB783', fontSize: 18}} />
                                         </a>
+                                        <Link to={`/admin/branches/${imp.id}`} className="p-2 mx-1" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}} onClick={this.handleOpenImport}>
+                                            <Edit style={{ color: '#0BB783', fontSize: 18}} />
+                                        </Link>
                                     </td>
                                 </tr>
                             ))}

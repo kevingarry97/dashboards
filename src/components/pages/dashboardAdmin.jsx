@@ -317,18 +317,18 @@ const DashboardAdmin = (props) => {
                     <div className={classes.toolbar} />
                     {user.role === 'BranchManager' && <>
                         <div className="row my-3">
-                            <div className="col-lg-6">
+                            <div className="col-lg-12">
                                 <div className="row">
-                                    <div className="col-sm-6 my-2">
+                                    <div className="col-sm-4 my-2">
                                         <DashboardCard 
                                             average={36}
-                                            title="Branches"
+                                            title="Orders"
                                             symbol={<Apartment style={{ color: '#727CF5'}} />}
                                             percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />}
                                             color="#0adf97"
                                         />
                                     </div>
-                                    <div className="col-sm-6 my-2">
+                                    <div className="col-sm-4 my-2">
                                         <DashboardCard 
                                             average={5}
                                             title="Products"
@@ -337,7 +337,7 @@ const DashboardAdmin = (props) => {
                                             color="#fa5c7c"
                                         />
                                     </div>
-                                    <div className="col-sm-6 my-2">
+                                    <div className="col-sm-4 my-2">
                                         <DashboardCard 
                                             average={23}
                                             title="Expenses"
@@ -346,33 +346,8 @@ const DashboardAdmin = (props) => {
                                             color="#0adf97"
                                         />
                                     </div>
-                                    <div className="col-sm-6 my-2">
-                                        <DashboardCard 
-                                            average={12}
-                                            title="Users"
-                                            symbol={<Person style={{ color: '#727CF5'}} />}
-                                            percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />}
-                                            color="#0adf97"
-                                        />
-                                    </div>
                                 </div>
                             </div> 
-                            <div className="col-lg-6">
-                                <div className="card border-0 my-2">
-                                    <div className="card-body">
-                                        <div className="clearfix mb-4">
-                                            <aside className="float-left">
-                                                <h6 className="mb-0" style={{ color: '#6c757d'}}>PROJECTIONS VS ACTUALS</h6>
-                                                <small style={{ color: '#B5B6C5', fontSize: 12}}>
-                                                </small>
-                                            </aside>
-                                        </div>
-                                        <div className="d-flex justify-content-center">
-                                            <Charts width={600} height={230} />
-                                        </div>      
-                                    </div>
-                                </div>
-                            </div>
                         </div> 
                         <Switch>
                             <Route path="/admin/branchOverview" component={BmOverview} />
@@ -385,11 +360,11 @@ const DashboardAdmin = (props) => {
                         </Switch>
                     </>}
                     {user.role === 'Administrator' && <>
-                        <DashboardBreadCrumb />
                         <Switch>
                             <Route path="/admin/overview" component={Overview} />
                             <Route path="/admin/products" component={Products} />
                             <Route path="/admin/branches" component={Branches} />
+                            <Route path="/admin/branches/:id" component={Branches} />
                             <Route path="/admin/orders" component={Order} />
                             <Route path="/admin/users" component={Users} />
                             <Route path="/admin/reports" component={Reports} />

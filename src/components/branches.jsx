@@ -17,6 +17,8 @@ import SuccessMessage from './common/successMessage';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import ImportTable from './common/importTable';
+import DashboardBreadCrumb from './common/dashboardBreadCrumb';
+import BranchesTable from './common/branchesTable';
 
 class Branches extends Form {
     state = { 
@@ -93,17 +95,15 @@ class Branches extends Form {
 
         return (
             <>
+                <DashboardBreadCrumb />
                 <div className="row">
                     <div className="col-lg-7 my-3">
                         <div className="card border-0">
                             <div className="card-body">
                                 <div className="clearfix border-bottom pb-2">
                                     <div className="float-left">
-                                        <h5 className="text-muted">Distributions</h5>
-                                    </div>
-                                    <div className="float-right">
                                         <button className="btn btn-sm mx-2" onClick={this.handleOpenDistribution} style={{ backgroundColor: '#0BB783', color: '#fff'}}>
-                                            <Add style={{ fontSize: 18}} /> Create
+                                            <Add style={{ fontSize: 18}} /> Create Distribution
                                         </button>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ class Branches extends Form {
                     <div className="col-lg-5 my-3">
                         <div className="card border-0">
                             <div className="card-body">
-                                <h6 className="text-muted">Branches Expenses</h6>
+                                <h6 className="font-weight-bold text-muted">Branches Expenses</h6>
                                 <ExpenseTable />
                             </div>
                         </div>
@@ -131,19 +131,8 @@ class Branches extends Form {
                     <div className="col-lg-7 my-3">
                         <div className="card border-0">
                             <div className="card-body">
-                                <Clearfix title="Projects and Visualization" />
-                                <div className="d-flex justify-content-center m-3">
-                                    <Charts width={700} height={400} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-body">
-                                <ExpenseForm />
+                                <h6 className="font-weight-bold text-muted">Branches Lists</h6>
+                                <BranchesTable />
                             </div>
                         </div>
                     </div>

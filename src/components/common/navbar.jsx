@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { CheckCircle, ExitToApp, ShoppingBasket } from '@material-ui/icons';
+import { AccountCircle, CheckCircle, ShoppingBasket } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import v1 from '../../assets/images/p1.jpg';
 import C1 from '../../assets/images/c1.jpg';
@@ -31,10 +31,6 @@ const Navbar = () => {
         <>
             <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div className="container">
-                    <img src="" className="navbar-brand" alt=""/>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
                     <div className="collapse navbar-collapse homeNavbar" id="navbarNav">
                         <ul className="navbar-nav mr-auto ml-auto">
                             <li className="nav-item">
@@ -54,7 +50,7 @@ const Navbar = () => {
                                     <ShoppingBasket style={{ color: '#0BB783'}} />
                                 </a>
                                 <Link to="/signIn" className="mx-1">
-                                    <ExitToApp style={{ color: '#0BB783'}} /><strong style={{ color: '#0BB783'}}>Log Out</strong> 
+                                    <AccountCircle style={{ color: '#0BB783'}} /> 
                                 </Link>
                             </li>
                         </ul>
