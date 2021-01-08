@@ -9,39 +9,45 @@ import '../css/navbar.css';
 import { getAllProducts } from '../../services/productService';
 import Navbar from '../common/navbar';
 import { viewAllBranches } from '../../services/branchService';
-import { ShoppingBasket } from '@material-ui/icons';
+import { ArrowDownward, ShoppingBasket } from '@material-ui/icons';
 import { Helmet } from 'react-helmet';
 
 const DATA = [
     {
         img: C1,
         title: 'Rice',
-        price: '400'
+        price: '400',
+        branch_id: 1
     },
     {
         img: v1,
         title: 'Flavour',
-        price: '500'
+        price: '500',
+        branch_id: 2
     },
     {
         img: C3,
         title: 'Coffee',
-        price: '800'
+        price: '800',
+        branch_id: 3
     },
     {
         img: P2,
         title: 'Beans',
-        price: '1200'
+        price: '1200',
+        branch_id: 4
     },
     {
         img: C2,
         title: 'Fruits',
-        price: '900'
+        price: '900',
+        branch_id: 5
     },
     {
         img: P3,
         title: 'HandCraft',
-        price: '1000'
+        price: '1000',
+        branch_id: 6
     },
 ];
 
@@ -49,15 +55,20 @@ const DATA = [
 const Home = () => {
     const [products, setProducts] = useState([]);
     const [branches, setBranches] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     async function populateProduct () {
         const {data} = await getAllProducts();
         setProducts(data['all_products']);
     }
 
+    const handleSelect = (item) => {
+        setSelectedProduct(item)
+    }
+
     async function populateBranches () {
         const {data} = await viewAllBranches();
-        setBranches(data);
+        setBranches([{id: "", name: "All Branches"}, ...data]);
     }
 
     useEffect(() => {
@@ -65,6 +76,17 @@ const Home = () => {
         populateBranches();
     },[]);
 
+    const getData = () => {
+        console.log(products)
+        let filtered = DATA;
+
+        if(selectedProduct && selectedProduct.id)
+            filtered = DATA.filter(m => m.branch_id == selectedProduct.id);
+
+        return { filtered };
+    } 
+
+    const { filtered } = getData();
     return (
         <div style={{ backgroundColor: '#F7FAFF'}}>
             <Helmet>
@@ -79,9 +101,18 @@ const Home = () => {
                     <div className="col-md-3 my-2">
                         <div className="card border-0 shadow-sm">
                             <div className="card-body">
-                                <nav className="nav flex-column">
+                                <div className="clearfix">
+                                    <div className="float-left mt-2">
+                                        <h6 className="text-muted font-weight-bold">CHOOSE NEAREST BRANCH</h6>
+                                    </div>
+                                    <div className="float-right">
+                                        <ArrowDownward style={{ fontSize: 19, color: '#0BB783'}} />
+                                    </div>
+                                </div>
+                                
+                                <nav className="nav flex-column mt-4">
                                     {branches.map((item) => (
-                                        <a key={item.id} style={{ color: "#677788"}} key={item.id} className="nav-link" href="">{item.name}</a>
+                                        <a key={item.id} style={{ color: "#677788"}} key={item.id} className="nav-link" onClick={() => handleSelect(item)}>{item.name}</a>
                                     ))}
                                 </nav>
                             </div>
@@ -89,7 +120,7 @@ const Home = () => {
                     </div>
                     <div className="col-md-8 my-2">
                         <div className="row">
-                            {DATA.map(d => (
+                            {filtered.map(d => (
                                 <div key={d.title} className="col-lg-3 col-md-4 my-3">
                                     <div className="card border-0">
                                         <img src={d.img} className="img-fluid" alt=""/>
