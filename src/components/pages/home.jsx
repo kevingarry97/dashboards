@@ -112,7 +112,7 @@ const Home = () => {
                                 
                                 <nav className="nav flex-column mt-4">
                                     {branches.map((item) => (
-                                        <a key={item.id} style={{ color: "#677788"}} key={item.id} className="nav-link" onClick={() => handleSelect(item)}>{item.name}</a>
+                                        <a key={item.id} style={{ color: "#677788"}} key={item.id} className={item === selectedProduct ? "nav-link font-weight-bold" : "nav-link"} style={{ cursor: 'pointer', color: '#677788'}} onClick={() => handleSelect(item)}>{item.name}</a>
                                     ))}
                                 </nav>
                             </div>
