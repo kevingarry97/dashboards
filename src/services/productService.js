@@ -27,3 +27,7 @@ export function getAllProducts() {
 export function viewBranchProduct() {
     return http.get(apiUrl + '/viewAllMainProducts');
 }
+
+export function getProductToOrder(id) {
+    return http.get(apiUrl + '/productToOrder/' + id);
+}

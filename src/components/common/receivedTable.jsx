@@ -1,9 +1,10 @@
 import React from 'react';
-import { InsertDriveFile } from '@material-ui/icons';
 import Form from './form';
 import { getSubProduct } from '../../services/subProduct';
 import Pagination from './pagination';
 import { paginate } from '../../utils/paginate';
+import { Edit } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 class ReceivedTable extends Form {
     state = { 
@@ -30,35 +31,21 @@ class ReceivedTable extends Form {
         const reics = paginate(received, currentPage, pageSize)
         return (
             <>
-                <div className="clearfix">
-                    <div className="float-left">
-                        <h6 className="text-muted mb-0">Recieved Products</h6>
-                        <p className="text-muted mt-0"><small>Provide us any expense to of your branch</small></p>
-                    </div>
-                    <div className="float-right">
-                        <button className="btn btn-sm mx-1" style={{ backgroundColor: '#fff', color: '#0BB783'}}>
-                            <InsertDriveFile style={{ fontSize: 18}} /> Reports
-                        </button>
-                    </div>
-                </div>
                 <div className="table-responsive">
                     <table className="table table-hover">
                         <tbody>
                             {reics.map(r => (
                                 <tr>
                                     <td><small style={{ color: '#98AECA'}}>#{r.id}</small></td>
-                                    <td><img src={r.product.imageUrl} width="50" alt=""/></td>
+                                    <td>
+                                        <img src={r.product.imageUrl} width="50" alt="" style={{ borderRadius: '50%'}} />
+                                    </td>
                                     <td>
                                         <strong style={{ color: '#98AECA'}}>{r.product.name}</strong></td>
                                     <td>
                                         <small>{r.receivedQuantity}</small>
                                         <br/>
                                         <small style={{ color: '#98AECA'}}>Quantity Received</small>
-                                    </td>
-                                    <td>
-                                        <small>{r.soldQuantity}</small>
-                                        <br/>
-                                        <small style={{ color: '#98AECA'}}>Sold Quantity</small>
                                     </td>
                                     <td>
                                         <small>{r.damagedQuantity}</small>
@@ -70,7 +57,11 @@ class ReceivedTable extends Form {
                                         <br/>
                                         <small style={{ color: '#98AECA'}}>Remaining Quantity</small>
                                     </td>
-                                    
+                                    <td className="pt-4">
+                                        <Link to={`/admin/branchOverview/${r.id}`} className="p-1" style={{ backgroundColor: '#F3F6F9', borderRadius: 6}} onClick={this.props.handleOpen}>
+                                            <Edit style={{ color: '#0BB783', fontSize: 14}} />
+                                        </Link>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

@@ -9,7 +9,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Apartment, Ballot, MonetizationOn, MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn, ExpandLess, ExpandMore, Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward, ExitToApp, AccountBalance, AllInbox, DirectionsBoat } from '@material-ui/icons';
+import { Apartment, Ballot, MonetizationOn, MoreHoriz, Add, InsertDriveFile, AssignmentTurnedIn, ExpandLess, ExpandMore, Menu, Business, LocalAtm, ImportantDevices, SupervisedUserCircle, ViewQuilt, Dashboard, Person, Assessment, ArrowDownward, ArrowUpward, ExitToApp, AccountBalance, AllInbox, DirectionsBoat, FiberManualRecord } from '@material-ui/icons';
 import Toolbar from '@material-ui/core/Toolbar';
 import Collapse from '@material-ui/core/Collapse';
 import { makeStyles, useTheme, createStyles } from '@material-ui/core/styles';
@@ -320,13 +320,39 @@ const DashboardAdmin = (props) => {
                             <div className="col-lg-12">
                                 <div className="row">
                                     <div className="col-sm-4 my-2">
-                                        <DashboardCard 
-                                            average={36}
-                                            title="Orders"
-                                            symbol={<Apartment style={{ color: '#727CF5'}} />}
-                                            percentage={<ArrowUpward style={{ fontSize: 18, color: '#0adf97', marginTop: 3}} />}
-                                            color="#0adf97"
-                                        />
+                                        <div className="card border-0">
+                                            <div className="card-body pb-0">
+                                                <div className="clearfix">
+                                                    <aside className="float-left">
+                                                        <h5 style={{ color: '#aca6ad'}}>Orders</h5>
+                                                    </aside>
+                                                    <aside className="float-right">
+                                                        <div style={{ backgroundColor: '#DCDEFC'}} className="p-2">
+                                                            <Ballot style={{ color: '#727CF5'}} />
+                                                        </div>
+                                                    </aside>
+                                                </div>
+                                                <div className="media my-2">
+                                                    <FiberManualRecord style={{ fontSize: 14, color: "#A4AAF9", marginTop: 3 }} />
+                                                    <div className="media-body pl-1">
+                                                        <span style={{ color: '#A4AAF9'}}>Pending Orders: </span>
+                                                    </div>
+                                                </div>
+                                                <div className="media my-2">
+                                                    <FiberManualRecord style={{ fontSize: 14, color: "#0ADF97", marginTop: 3 }} />
+                                                    <div className="media-body pl-1">
+                                                        <span style={{ color: '#0ADF97'}}>Success Orders: </span>
+                                                    </div>
+                                                </div>
+                                                <div className="media my-2">
+                                                    <FiberManualRecord style={{ fontSize: 14, color: "red", marginTop: 3 }} />
+                                                    <div className="media-body pl-1">
+                                                        <span style={{ color: 'red'}}>Cancelled Orders: </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                     <div className="col-sm-4 my-2">
                                         <DashboardCard 
@@ -350,6 +376,7 @@ const DashboardAdmin = (props) => {
                             </div> 
                         </div> 
                         <Switch>
+                            <Route path="/admin/branchOverview/:id" component={BmOverview} />
                             <Route path="/admin/branchOverview" component={BmOverview} />
                             <Route path="/admin/branchOrders" component={BmOrders} />
                             <Route path="/admin/branchExpenses" component={BmExpenses} />
@@ -361,10 +388,10 @@ const DashboardAdmin = (props) => {
                     </>}
                     {user.role === 'Administrator' && <>
                         <Switch>
+                            <Route path="/admin/branches/:id" component={Branches} />
+                            <Route path="/admin/branches" component={Branches} />
                             <Route path="/admin/overview" component={Overview} />
                             <Route path="/admin/products" component={Products} />
-                            <Route path="/admin/branches" component={Branches} />
-                            <Route path="/admin/branches/:id" component={Branches} />
                             <Route path="/admin/orders" component={Order} />
                             <Route path="/admin/users" component={Users} />
                             <Route path="/admin/reports" component={Reports} />

@@ -8,3 +8,7 @@ export function getBranchOrders() {
 export function viewAllBranchOrders() {
     return http.get(apiUrl + '/viewAllBranchOrders');
 }
+
+export function orderingProduct (id, quantityToOrder) {
+    return http.post(apiUrl + '/ordering/' + id, quantityToOrder);
+}
