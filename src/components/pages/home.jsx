@@ -164,7 +164,7 @@ class Home extends Form {
                                 <div className="table-responsive">
                                     <table className="table table-borderless">
                                         <tbody>
-                                            <tr key={orders?.id}>
+                                            {orders && <tr key={orders?.id}>
                                                 <td>
                                                 <small style={{ color: '#6C757D'}}> #{orders?.product_id}</small>
                                                 </td>
@@ -184,12 +184,12 @@ class Home extends Form {
                                                 </td>
                                                 <td>
                                                     {this.state.error && <SuccessMessage message={this.state.error} className="alert-success" />}
-                                                    {orders && <form onSubmit={this.handleSubmit}>
+                                                    <form onSubmit={this.handleSubmit}>
                                                         {this.renderInput('quantityToOrder', 'Quantity')}
-                                                        {this.renderButton('Order now')}
-                                                    </form>}
+                                                        {this.renderButton('Add to Cart')}
+                                                    </form>
                                                 </td>
-                                            </tr>
+                                            </tr>}
                                         </tbody>
                                     </table>
                                 </div>
