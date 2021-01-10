@@ -12,3 +12,7 @@ export function viewAllBranchOrders() {
 export function orderingProduct (id, quantityToOrder) {
     return http.post(apiUrl + '/ordering/' + id, quantityToOrder);
 }
+
+export function viewOrder() {
+    return http.get(apiUrl + '/myOrders');
+}

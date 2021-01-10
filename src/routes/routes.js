@@ -21,7 +21,6 @@ const Routes = () => {
             }} />
             <Route path="/signUp" component={SignUp} />
             <Route path="/signIn" component={SignIn} />
-            {/* {user && user.role === 'Customer' && <Route path="/home" component={Home} />} */}
             {user && user.role === 'Administrator' && <Redirect to="/admin" />}
             <Redirect from="/" exact to="/home" />
             <Redirect to="/home" />

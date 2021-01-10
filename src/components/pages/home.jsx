@@ -11,6 +11,10 @@ import Form from '../common/form';
 import Joi from 'joi-browser';
 import { orderingProduct } from '../../services/orderService';
 import SuccessMessage from '../common/successMessage';
+import P1 from '../../assets/images/c3.jpg';
+import P2 from '../../assets/images/c2.jpg';
+import '../css/navbar.css';
+// import '../css/home.css';
 
 class Home extends Form {
     state = {  
@@ -67,6 +71,7 @@ class Home extends Form {
     doSubmit = async () => {
         const {data} = await orderingProduct(this.state.orders.product_id, this.state.data);
         this.setState({error: data.message});
+        this.props.history.push('/checkOut');
     }
 
     getData = () => {
@@ -89,22 +94,8 @@ class Home extends Form {
                         <title>HOME</title>
                         <meta name="description" content="Awesome description" />
                     </Helmet>
-                    <Navbar handleOpen={this.handleOpen} />
-                    <section className="bg-white py-5">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-7">
-                                    <h4 className="font-weight-bold" style={{ color: '#0BB783'}}>TOKA TRADING Ltd,</h4>
-                                    <p className="text-muted pt-2" style={{ fontSize: 15, lineHeight: '1.8em'}}>We import goods and beverages, from neighbouring <br/> 
-                                    countries and sell them to our local country 
-                                    </p>
-                                    <button className="btn px-3 py-2" style={{ backgroundColor: "#0BB783", color: "#fff"}}>Get Started</button>
-                                </div>
-                                <div className="col-md-4 offset-md-1">
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    <Navbar />
+                    
                     <div className="container-fluid mt-4">
                         <h4 className="font-weight-bold text-center pt-3">Available Products</h4>
                         <p className="text-center" style={{color: '#677788'}}>All products below are available in the branch allocated</p>
@@ -133,7 +124,7 @@ class Home extends Form {
                                 <div className="row">
                                     {filtered.map(d => (
                                         <div key={d.title} className="col-lg-3 col-md-4 my-3">
-                                            <div className="card border-0">
+                                            <div className="card border-0 cards">
                                                 <img src={d.product.imageUrl} className="img-fluid" alt=""/>
                                                 <div className="mt-2 card-body">
                                                     <h4 className="font-weight-bold text-muted text-center mb-3 ">{d.product.name}</h4>
@@ -171,20 +162,25 @@ class Home extends Form {
                             <div className="card-body">
                                 
                                 <div className="table-responsive">
-                                    <table className="table">
+                                    <table className="table table-borderless">
                                         <tbody>
                                             <tr key={orders?.id}>
                                                 <td>
-                                                <small style={{ color: '#6C757D'}}>{orders?.branch_id}</small>
+                                                <small style={{ color: '#6C757D'}}> #{orders?.product_id}</small>
                                                 </td>
                                                 <td>
-                                                    <small style={{ color: '#6C757D'}}>{orders?.branch.name}</small>
+                                                    <img src={orders?.product.imageUrl} width={50} alt="" style={{ borderRadius: '50%'}} />
                                                 </td>
                                                 <td>
-                                                    <small style={{ color: '#6C757D'}}>{orders?.branch.location}</small>
+                                                    <small style={{ color: '#6C757D'}}>{orders?.product.name}</small>
                                                 </td>
                                                 <td>
-                                                    <small style={{ color: '#6C757D'}}>{orders?.product_id}</small>
+                                                    <small style={{ color: '#6C757D'}}>
+                                                        <strong>{orders?.product.unit_price}</strong>
+                                                        <br/>
+                                                        Per Qty
+                                                    </small>
+                                                    
                                                 </td>
                                                 <td>
                                                     {this.state.error && <SuccessMessage message={this.state.error} className="alert-success" />}

@@ -1,3 +1,6 @@
+.bg-dark {
+  background: linear-gradient(to right, #3e864d, #4297cf) !important;
+}
 .bg-image {
   position: absolute;
   width: 100%;
@@ -6,7 +9,22 @@
   clip-path: circle(36.9% at 68% 0);
 }
 .homeNavbar .nav-link {
-  color: #677788 !important;
+  color: #f3f3f3 !important;
   font-size: 16px;
   font-weight: 600;
+}
+.container-fluid .cards {
+  cursor: pointer;
+  transition: transform 1000ms ease-out;
+}
+
+.container-fluid .cards:hover {
+  transform: scale(1.07);
+}
+
+.mosaic {
+  display: grid;
+}
+.mosaic__item:first-of-type {
+  grid-column: 2 / span 1;
 }
