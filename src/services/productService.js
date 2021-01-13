@@ -2,14 +2,14 @@ import http from './httpService';
 import { apiUrl } from '../config.json';
 
 export function addProduct(products) {
-    const data = new FormData();
+    const fd = new FormData();
 
-    data.append('name', products.name);
-    data.append('quantity', products.quantity);
-    data.append('unitPrice', products.unitPrice);
-    data.append('imageUrl', products.imageUrl);
+    fd.append('name', products.name);
+    fd.append('quantity', products.quantity);
+    fd.append('unitPrice', products.unitPrice);
+    fd.append('imageUrl', products.imageUrl);
 
-    return http.post(apiUrl + '/createNewProduct', data);
+    return http.post(apiUrl + '/createNewProduct', fd);
 }
 
 export function getProduct() {

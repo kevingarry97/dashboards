@@ -57,7 +57,7 @@ class BmExpenses extends Form {
                                 </div>
                             </div>                 
                             <BranchExpense expense={exps} />
-                            <Pagination itemsCount={expenses.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
+                            <Pagination itemsCount={expenses?.length} currentPage={currentPage} pageSize={pageSize} onPageChange={this.handlePageChange} />
                         </div>
                     </div>
                 </div>

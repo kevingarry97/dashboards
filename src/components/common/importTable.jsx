@@ -98,12 +98,6 @@ class ImportTable extends Form {
                             <Add style={{ fontSize: 18}} /> Create Imports
                         </button>
                     </div>
-                    <div className="float-right">
-                        
-                        <button className="btn btn-sm mx-1"style={{ backgroundColor: '#fff', color: '#0BB783'}}>
-                            <InsertDriveFile style={{ fontSize: 18}} /> Reports
-                        </button>
-                    </div>
                 </div>
                 <div className="table-responsive my-3">
                     <table className="table table-hover">

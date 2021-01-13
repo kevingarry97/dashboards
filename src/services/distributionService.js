@@ -16,3 +16,11 @@ export function getSpecificDistribution(id) {
 export function getDistributionSpecificProduct(id) {
     return http.get(apiUrl + '/viewDistributionsPerProduct/' + id);
 }
+
+export function getBranchDistribution() {
+    return http.get(apiUrl + '/viewMyDistributions');
+}
+
+export function viewSpecificDistribution(id, distribution) {
+    return http.post(apiUrl + '/viewMySpecificDistribution/' + id + '/approve', distribution);
+}

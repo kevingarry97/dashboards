@@ -34,7 +34,7 @@ class Products extends Form {
 
     doSubmit = async () => {
         const {data} = await addProduct(this.state.data);
-        console.log(data)
+        console.log(data);
         this.setState({data: {name: '', quantity: '', unitPrice: '', imageUrl: ''}})
     }
 

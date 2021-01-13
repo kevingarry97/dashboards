@@ -29,6 +29,7 @@ import Charts from '../common/chart';
 import BmOverview from '../bmOverview';
 import BmOrders from '../bmOrders';
 import BmExpenses from '../bmExpenses';
+import BmStock from '../bmStock';
 
 const drawerWidth = 240;
 
@@ -119,6 +120,14 @@ const DashboardAdmin = (props) => {
                                 <ImportantDevices style={{ color: '#fff', fontSize: 30}} />
                             </ListItemIcon>
                             <ListItemText primary="Expenses" style={{ color: '#F4F5F6'}} />
+                        </ListItem>
+                    </NavLink>
+                    <NavLink to="/admin/branchStock" className="nav-link">
+                        <ListItem>
+                            <ListItemIcon>
+                                <ImportantDevices style={{ color: '#fff', fontSize: 30}} />
+                            </ListItemIcon>
+                            <ListItemText primary="Stock" style={{ color: '#F4F5F6'}} />
                         </ListItem>
                     </NavLink>
                     <div className="nav-link">
@@ -380,6 +389,7 @@ const DashboardAdmin = (props) => {
                             <Route path="/admin/branchOverview" component={BmOverview} />
                             <Route path="/admin/branchOrders" component={BmOrders} />
                             <Route path="/admin/branchExpenses" component={BmExpenses} />
+                            <Route path="/admin/branchStock" component={BmStock} />
                             <Route path="/admin/reports" component={Reports} />
                             <Route path="/admin/imports" component={ImportsReports} />
                             <Route path="/admin/distributions" component={DistributionsReports} />
