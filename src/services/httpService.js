@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.headers.common['Content-Type'] = 'application/pdf'
+axios.defaults.headers.common['Enctype'] = 'multipart/formdata';
 axios.interceptors.response.use(null, (error) => {
     const expectedError =
         error.response &&

@@ -7,6 +7,7 @@ import Logout from '../components/common/logout';
 import SignUp from '../components/pages/signUp';
 import { getCurrentUser } from '../services/auth';
 import Product from '../components/pages/product';
+import Contact from '../components/pages/contact';
 
 const Routes = () => {
     const user = getCurrentUser();
@@ -15,6 +16,7 @@ const Routes = () => {
         <Switch>
             <Route path="/home" component={Home} />
             <Route path="/product" component={Product} />
+            <Route path="/contact" component={Contact} />
             {user && <Route path="/logout" component={Logout} />}
             <Route path="/admin" render={(props) => {
                 if(!user) return <Redirect to="/signIn" />
