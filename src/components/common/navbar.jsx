@@ -48,7 +48,7 @@ const Navbar = () => {
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 {user?.role === 'Customer' && <a className="mx-2" onClick={handleOpen}>
-                                    <ShoppingBasket style={{ color: '#e6ecea'}} />
+                                    <ShoppingBasket style={{ color: '#050f0c', marginRight: 20}} />
                                 </a>}
                                 <Link to="/signIn">
                                     <span className="hero__signUp">
