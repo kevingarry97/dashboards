@@ -9,14 +9,12 @@ class ReceivedTable extends Form {
         currentPage: 1,
         pageSize: 3,
         received: [],
-        error: ''
     }
 
     async populateReceived() {
         const {data} = await getSubProduct();
         if(data.message) return this.setState({error: data.message})
         this.setState({received: data[1]});
-        console.log(data);
     }
 
     handlePageChange = page => {

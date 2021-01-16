@@ -62,6 +62,7 @@ class ImportTable extends Form {
     handleClose = () => {
         this.setState({openImport: false});
         this.setState({openView: false});
+        this.setState({error: ''});
     }
 
     // mapToViewModel(movie) {

@@ -67,7 +67,13 @@ const Navbar = () => {
                     <small style={{ color: '#C4B7B7'}}>Below are items that you have selected.</small> 
                 </DialogTitle>
                 <DialogContent>
-                    
+                    <div className="table-responsive">
+                        <table className="table table-hover">
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
                 </DialogContent>
             </Dialog>
         </>

@@ -13,7 +13,8 @@ import SuccessMessage from '../common/successMessage';
 
 class Product extends Form {
     state = {  
-        data: {quantityToOrder: ''},
+        data: {quantity: ''},
+        productId: null,
         errors: {},
         products: [],
         branches: [],
@@ -25,19 +26,7 @@ class Product extends Form {
     }
 
     schema = {
-        quantityToOrder: Joi.string().required().label("Quantity")
-    }
-
-    handleOpen = async (id) => {
-        if(this.state.user === null) return this.props.history.push('/signIn');
-        this.setState({open: true})
-        const {data} = await getProductToOrder(id);
-        this.setState({orders: data});
-        console.log(this.state.orders)
-    }
-
-    handleClose = () => {
-        this.setState({open: false});
+        quantity: Joi.string().required().label("Quantity")
     }
 
     async populateProduct() {
@@ -62,10 +51,10 @@ class Product extends Form {
         await this.populateBranches();
     }
 
-    doSubmit = async () => {
-        const {data} = await orderingProduct(this.state.orders.product_id, this.state.data);
+    doSubmit = async (id) => {
+        const {data} = await orderingProduct(id, this.state.data);
         this.setState({error: data.message});
-        this.props.history.push('/checkOut');
+        // this.props.history.push('/checkOut');
     }
 
     getData = () => {
@@ -118,13 +107,20 @@ class Product extends Form {
                                         <div className="card border-0 shadow cards">
                                             <img src={d.product.imageUrl} height="200" alt=""/>
                                             <div className="card-body">
-                                                <h4 className="font-weight-bold text-muted text-center mb-4">{d.product.name}</h4>
                                                 <div className="clearfix mt-4">
-                                                    <small className="font-weight-bold float-left" style={{ color: "#0BB783"}}>Rwf {d.product.unit_price}</small>
-                                                    <button className="btn btn-sm float-right" style={{ backgroundColor: '#0BB783', color: '#fff'}} onClick={() => this.handleOpen(d.product.id)}>
-                                                        <ShoppingBasket style={{ fontSize: 18}} /> Add Cart
-                                                    </button>
+                                                    <small className="font-weight-bold float-right" style={{ color: "#0BB783"}}>Rwf {d.product.unit_price}</small>
+                                                    <h4 className="font-weight-bold text-muted text-center mb-4 float-left">{d.product.name}</h4>
                                                 </div>
+                                                <form>
+                                                    <div className="clearfix">
+                                                        <div className="float-left">
+                                                            {this.renderInput('quantity', 'Quantity', '')}
+                                                        </div>
+                                                        <button disabled={this.validate()} className="btn btn-block btn-sm font-weight-bold py-2" style={{ backgroundColor: '#727CF5', color: '#fff', borderRadius: 20}} onClick={() => this.doSubmit(d.product.id)}>
+                                                            Add to Cart
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

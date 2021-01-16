@@ -72,6 +72,7 @@ class Branches extends Form {
     handleClose = () => {
         this.setState({ openDistribution: false });
         this.setState({viewDistribution: false});
+        this.setState({error: ''})
     };
 
     handlePageChange = page => {

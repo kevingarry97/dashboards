@@ -36,6 +36,7 @@ class BmOverview extends Form {
 
     handleClose = () => {
         this.setState({open: false});
+        this.setState({error: ''})
     }
 
     handlePageChange = (page) => {

@@ -9,8 +9,8 @@ export function viewAllBranchOrders() {
     return http.get(apiUrl + '/viewAllBranchOrders');
 }
 
-export function orderingProduct (id, quantityToOrder) {
-    return http.post(apiUrl + '/ordering/' + id, quantityToOrder);
+export function orderingProduct (id, quantity) {
+    return http.post(apiUrl + '/productToOrder/' + id, quantity);
 }
 
 export function viewOrder() {

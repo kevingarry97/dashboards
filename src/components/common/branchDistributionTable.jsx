@@ -27,12 +27,14 @@ class BranchDistributionTable extends Form {
     }
 
     handleClose = () => {
-        this.setState({open: false})
+        this.setState({open: false});
+        this.setState({error: ''})
     }
 
     doSubmit = async () => {
         const {data} = await viewSpecificDistribution(this.state.distributedId, this.state.data);
         this.setState({error: data.message});
+        this.setState({data: { receivedQuantity: '', damagedQuantity: '', missingQuantity: '' }})
     }
 
     render() { 
@@ -83,7 +85,7 @@ class BranchDistributionTable extends Form {
                 </div>
                 <Dialog open={this.state.open} onClose={this.handleClose}>
                     <DialogTitle>
-                        Hello
+                        Record distributed
                     </DialogTitle>
                     <DialogContent>
                         {this.state.error && <SuccessMessage message={this.state.error} className="alert-danger" />}
